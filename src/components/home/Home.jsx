@@ -14,10 +14,11 @@ export default function Home() {
       </div>
       <div className="home-right-content">
         <div className="home-right-textbox">
-          <p className="home-welcom-message">
+          <h5 className="home-welcom-message" style={{ textAlign: "center" }}>
             <code>
               Welcome to portfolio/study log for growth/progress in my journey
               to software engineering.
+              <br />
               <br />
               - Courses: View courses that I have taken
               <br />- Study: View my progress log in algorithm/coding
@@ -25,10 +26,11 @@ export default function Home() {
               <br />- Resume/Contact: View my resume and contact info
               <br />- Github: Direct link to my github repo
             </code>
-          </p>
+          </h5>
         </div>
-
-        <img src={me} alt="" />
+        <div className="home-right-content-pictureframe">
+          <img src={me} alt="" />
+        </div>
       </div>
     </div>
   );
