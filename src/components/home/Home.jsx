@@ -7,14 +7,24 @@ export default function Home() {
   return (
     <div className="home">
       <div className="home-left-content">
-        <h1>Welcome to Jaethem8!</h1>
+        <h1 style={{ textAlign: "center" }}>
+          <code>// Steady but Surely</code>
+        </h1>
         <img src={yub} alt="" />
       </div>
       <div className="home-right-content">
         <div className="home-right-textbox">
           <p className="home-welcom-message">
-            Welcome to portfolio/study log for growth/progress in my journey to
-            software engineering
+            <code>
+              Welcome to portfolio/study log for growth/progress in my journey
+              to software engineering.
+              <br />
+              - Courses: View courses that I have taken
+              <br />- Study: View my progress log in algorithm/coding
+              <br />- Projects: View my Projects
+              <br />- Resume/Contact: View my resume and contact info
+              <br />- Github: Direct link to my github repo
+            </code>
           </p>
         </div>
 
