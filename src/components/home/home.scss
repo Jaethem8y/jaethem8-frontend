@@ -1,0 +1,32 @@
+.home {
+  margin-top: 7em;
+  display: flex;
+  width: 100%;
+  min-height: 86vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 3em;
+  padding-right: 3em;
+  .home-left-content {
+    max-width: 40%;
+    min-width: 300px;
+    box-sizing: border-box;
+    padding: 1em;
+    img {
+      max-width: 100%;
+      min-width: 300px;
+      height: auto;
+    }
+  }
+  .home-right-content {
+    max-width: 40%;
+    min-width: 300px;
+    box-sizing: border-box;
+    padding: 1em;
+    img {
+      max-width: 100%;
+      min-width: 300px;
+      height: auto;
+    }
+  }
+}
