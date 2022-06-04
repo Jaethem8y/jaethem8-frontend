@@ -23,13 +23,13 @@ export default function Header() {
               <Nav.Link href="/" className="header-nav">
                 Home
               </Nav.Link>
-              <Nav.Link href="/course" className="header-nav">
+              <Nav.Link href="/courses" className="header-nav">
                 Courses
               </Nav.Link>
               <Nav.Link href="/study" className="header-nav">
                 Study
               </Nav.Link>
-              <Nav.Link href="/project" className="header-nav">
+              <Nav.Link href="/projects" className="header-nav">
                 Projects
               </Nav.Link>
               <Nav.Link href="/contact" className="header-nav">

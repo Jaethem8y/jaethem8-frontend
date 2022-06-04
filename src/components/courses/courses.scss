@@ -1,0 +1,11 @@
+.courses-wrapper {
+  min-height: 86vh;
+  margin-top: 7em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .course-content {
+    min-width: 400px;
+    max-width: 80%;
+  }
+}
