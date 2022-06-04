@@ -7,6 +7,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import Courses from "./components/courses/Courses";
+import Resume from "./components/resume/Resume";
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/courses" element={<Courses />} />
-          <Route path="/contact" />
           <Route path="/projects" />
+          <Route path="/contact" element={<Resume />} />
           <Route path="/" exact element={<Home />} />
         </Routes>
         <Footer />
