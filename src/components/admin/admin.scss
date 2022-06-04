@@ -1,0 +1,13 @@
+.admin-wrapper {
+  margin-top: 7em;
+  display: flex;
+  width: 100%;
+  min-height: 86vh;
+  .admin-content {
+    padding-left: 10em;
+    padding-right: 10em;
+    h3 {
+      margin-left: 2em;
+    }
+  }
+}

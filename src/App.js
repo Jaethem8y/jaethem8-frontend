@@ -8,6 +8,8 @@ import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import Courses from "./components/courses/Courses";
 import Resume from "./components/resume/Resume";
+import Admin from "./components/admin/Admin";
+import ProjectAdd from "./components/admin/porject/add/ProjectAdd";
 
 function App() {
   return (
@@ -15,6 +17,13 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="/admin/study/add" />
+          <Route path="/admin/study" exact />
+
+          <Route path="/admin/projects/add" element={<ProjectAdd />} />
+          <Route path="/admin/projects" exact />
+
+          <Route path="/admin" exact element={<Admin />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/study" />
           <Route path="/projects" />

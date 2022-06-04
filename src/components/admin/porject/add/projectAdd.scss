@@ -1,0 +1,17 @@
+.projectAdd-wrapper {
+  margin-top: 7em;
+  display: flex;
+  width: 100%;
+  min-height: 86vh;
+  justify-content: center;
+  .projectAdd-content {
+    width: 80%;
+  }
+  .send {
+    text-align: center;
+  }
+}
+
+.textbox {
+  width: 100%;
+}
