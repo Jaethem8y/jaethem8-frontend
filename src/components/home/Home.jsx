@@ -8,7 +8,7 @@ export default function Home() {
     <div className="home">
       <div className="home-left-content">
         <h1 style={{ textAlign: "center" }}>
-          <code>// Steady but Surely</code>
+          <code>// Steady && Surely</code>
         </h1>
         <img src={yub} alt="" />
       </div>

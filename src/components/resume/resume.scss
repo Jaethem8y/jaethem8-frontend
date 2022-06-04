@@ -8,10 +8,23 @@
     min-width: 400px;
     max-width: 80%;
     width: 600px;
+
+    .resume-title {
+      display: flex;
+      justify-content: space-between;
+      p {
+        margin-top: 1.2em;
+      }
+    }
+
     .resume-header {
       display: flex;
       justify-content: space-between;
       margin-bottom: 0;
+      padding: 0;
+      h1 {
+        margin-bottom: 0;
+      }
       p {
         margin-top: 1.2em;
       }

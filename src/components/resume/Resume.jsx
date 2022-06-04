@@ -7,8 +7,17 @@ export default function Resume() {
   return (
     <div className="resume-wrapper">
       <div className="resume-content">
+        <br />
+        <div className="resume-title">
+          <h1>Simplified Resume</h1>
+          <p>
+            For full resume, please email me at:
+            <a href="mailto:jaehyeok.choi@drake.edu">jaehyeok.choi@drake.edu</a>
+          </p>
+        </div>
+        <br />
         <div className="resume-header">
-          <h1>Jaehyeok Choi</h1>
+          <h2>Jaehyeok Choi</h2>
           <p>Des Moines, IA, 50311 </p>
           <p>jaehyeok.choi@drake.edu</p>
         </div>
@@ -42,6 +51,9 @@ export default function Resume() {
             organizations.
           </p>
         </div>
+        <hr />
+        <h2>Projects</h2>
+        <div className="resume-project"></div>
       </div>
     </div>
   );
