@@ -14,7 +14,7 @@ export default function Home() {
       </div>
       <div className="home-right-content">
         <div className="home-right-textbox">
-          <h5 className="home-welcom-message" style={{ textAlign: "center" }}>
+          <h5 className="home-welcom-message">
             <code>
               Welcome to portfolio/study log for growth/progress in my journey
               to software engineering.

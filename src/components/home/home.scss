@@ -26,7 +26,7 @@
     box-sizing: border-box;
     padding: 2em;
     .home-right-textbox {
-      margin-top: 3em;
+      margin: 3em auto;
       .home-welcome-message {
       }
     }
@@ -37,7 +37,7 @@
       img {
         max-width: 80%;
         min-width: 300px;
-        margin-top: 4em;
+        margin-top: 1em;
         border-radius: 50%;
         height: auto;
       }

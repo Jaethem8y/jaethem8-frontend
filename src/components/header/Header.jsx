@@ -1,6 +1,8 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 import "./header.scss";
+
+import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <>
@@ -31,7 +33,7 @@ export default function Header() {
                 Projects
               </Nav.Link>
               <Nav.Link href="/contact" className="header-nav">
-                Contact
+                Resume/Contact
               </Nav.Link>
               <Nav.Link href="/" className="header-nav">
                 <a
