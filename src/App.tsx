@@ -10,6 +10,7 @@ import Courses from "./components/courses/Courses";
 import Resume from "./components/resume/Resume";
 import Admin from "./components/admin/Admin";
 import ProjectAdd from "./components/admin/porject/add/ProjectAdd";
+import Test from "./components/test/Test";
 
 function App() {
   return (
@@ -17,18 +18,20 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="/test" element={<Test />} />
+
           <Route path="/admin/study/add" />
-          <Route path="/admin/study" exact />
+          <Route path="/admin/study" />
 
           <Route path="/admin/projects/add" element={<ProjectAdd />} />
-          <Route path="/admin/projects" exact />
+          <Route path="/admin/projects" />
 
-          <Route path="/admin" exact element={<Admin />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/study" />
           <Route path="/projects" />
           <Route path="/contact" element={<Resume />} />
-          <Route path="/" exact element={<Home />} />
+          <Route path="/"  element={<Home />} />
         </Routes>
         <Footer />
       </BrowserRouter>

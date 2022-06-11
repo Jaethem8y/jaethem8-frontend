@@ -1,7 +1,4 @@
 import "./resume.scss";
-import resume2022 from "./Resume2022.pdf";
-
-import { Document, Page } from "react-pdf";
 
 export default function Resume() {
   return (

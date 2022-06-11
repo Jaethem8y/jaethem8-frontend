@@ -35,16 +35,14 @@ export default function Header() {
               <Nav.Link href="/contact" className="header-nav">
                 Resume/Contact
               </Nav.Link>
-              <Nav.Link href="/" className="header-nav">
-                <a
-                  href="https://github.com/Jaethem8y?tab=repositories"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="header-a-github text-secondary"
-                >
-                  Github
-                </a>
-              </Nav.Link>
+              <a
+                href="https://github.com/Jaethem8y?tab=repositories"
+                target="_blank"
+                rel="noreferrer"
+                className="header-a-github text-secondary header-nav"
+              >
+                Github
+              </a>
             </Nav>
           </Navbar.Collapse>
         </Container>
