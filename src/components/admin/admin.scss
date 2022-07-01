@@ -6,8 +6,15 @@
   .admin-content {
     padding-left: 10em;
     padding-right: 10em;
-    h3 {
-      margin-left: 2em;
+    h5 {
+      margin-left: 1em;
+      margin-top: 1em;
+    }
+    p {
+      margin: 0;
+    }
+    .admin-links {
+      margin-left: 3em;
     }
   }
 }

@@ -1,17 +1,29 @@
-.projectAdd-wrapper {
+.add-project-wrapper {
   margin-top: 7em;
-  display: flex;
-  width: 100%;
-  min-height: 86vh;
-  justify-content: center;
-  .projectAdd-content {
-    width: 80%;
-  }
-  .send {
-    text-align: center;
+  min-height: 88vh;
+  .add-project-content {
+    margin: 3em;
+    margin-left: 10em;
+    .add-project-post {
+      margin-left: 2em;
+      padding: 2em;
+      input,
+      textarea {
+        width: 400px;
+      }
+      .add-project-object {
+        padding: 2em;
+      }
+    }
   }
 }
-
-.textbox {
-  width: 100%;
+input,
+textarea {
+  width: 400px;
+}
+input {
+  height: 30px;
+}
+textarea {
+  height: 200px;
 }
