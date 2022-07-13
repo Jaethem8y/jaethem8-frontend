@@ -1,12 +1,17 @@
-import "./projectAdd.scss";
+import "./projectEdit.scss";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 import { url } from "../../../../config";
 import { BlogPost, BlogContent } from "../../../../types/blog";
 
-export default function ProjectAdd() {
+export default function ProjectEdit() {
+  const { title } = useParams();
   const [amount, setAmount] = useState(0);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [blogPost, setBlogPost] = useState<BlogPost>({
     title: "",
     role: "",
@@ -19,12 +24,22 @@ export default function ProjectAdd() {
     Array<BlogContent>
   >([]);
 
-  const onPostTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      title: e.target.value,
-    });
-  };
+  useEffect(() => {
+    const fetchBlogPost = async () => {
+      try {
+        setLoading(true);
+        setError(false);
+        const res = await axios.get(url + "API/blogPost/" + title);
+        setBlogPost(res.data);
+        setBlogContentsArray(res.data.blogContents);
+        setAmount(res.data.blogContents.length);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchBlogPost();
+  }, []);
+
   const onPostRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBlogPost({
       ...blogPost,
@@ -94,19 +109,19 @@ export default function ProjectAdd() {
     ]);
   };
 
-  const addPost = () => {
+  const editPost = () => {
     axios
-      .post(url + "add/blogPost", blogPost, {
+      .post(url + "edit/blogPost", blogPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
       })
       .then((res) => {
-        alert("Post Has been Created Successfully !");
+        alert("Post Has been Edited Successfully !");
       })
       .catch((err) => {
         console.log(err);
-        alert("Failed to Create a Post !");
+        alert("Failed to edit a Post !");
       });
   };
 
@@ -116,6 +131,13 @@ export default function ProjectAdd() {
       contents: blogContentsArray,
     });
   };
+
+  if (loading) {
+    return <h3>Loading ...</h3>;
+  }
+  if (error) {
+    return <h3>There has been an error</h3>;
+  }
 
   return (
     <div className="add-project-wrapper">
@@ -127,13 +149,17 @@ export default function ProjectAdd() {
               <tr>
                 <td>title : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostTitleChange(e)} />
+                  <input type="text" value={blogPost.title} disabled />
                 </td>
               </tr>
               <tr>
                 <td>role : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostRoleChange(e)} />
+                  <input
+                    type="text"
+                    onChange={(e) => onPostRoleChange(e)}
+                    value={blogPost.role}
+                  />
                 </td>
               </tr>
               <tr>
@@ -142,19 +168,28 @@ export default function ProjectAdd() {
                   <input
                     type="text"
                     onChange={(e) => onPostFrontendChange(e)}
+                    value={blogPost.frontend}
                   />
                 </td>
               </tr>
               <tr>
                 <td>backend : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostBackendChange(e)} />
+                  <input
+                    type="text"
+                    onChange={(e) => onPostBackendChange(e)}
+                    value={blogPost.backend}
+                  />
                 </td>
               </tr>
               <tr>
                 <td>general : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostGeneralChagne(e)} />
+                  <input
+                    type="text"
+                    onChange={(e) => onPostGeneralChagne(e)}
+                    value={blogPost.general}
+                  />
                 </td>
               </tr>
             </tbody>
@@ -172,6 +207,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentImageChange(e, i)}
+                          value={blogContentsArray[i].image}
                         />
                       </td>
                     </tr>
@@ -181,6 +217,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentContentChange(e, i)}
+                          value={blogContentsArray[i].content}
                         />
                       </td>
                     </tr>
@@ -190,6 +227,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentCodeChange(e, i)}
+                          value={blogContentsArray[i].code}
                         />
                       </td>
                     </tr>
@@ -202,7 +240,7 @@ export default function ProjectAdd() {
         </div>
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
-        <button onClick={() => addPost()}>Send Post</button>
+        <button onClick={() => editPost()}>Send Post</button>
       </div>
     </div>
   );

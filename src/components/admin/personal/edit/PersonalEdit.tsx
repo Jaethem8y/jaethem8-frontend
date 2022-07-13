@@ -1,13 +1,17 @@
 import "./personalAdd.scss";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 import { url } from "../../../../config";
 import { PersonalPost, PersonalContent } from "../../../../types/personal";
 
-
 export default function ProjectAdd() {
+  const { title } = useParams();
   const [amount, setAmount] = useState(0);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [personalPost, setPersonalPost] = useState<PersonalPost>({
     title: "",
     contents: [],
@@ -16,12 +20,21 @@ export default function ProjectAdd() {
     Array<PersonalContent>
   >([]);
 
-  const onPostTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPersonalPost({
-      ...personalPost,
-      title: e.target.value,
-    });
-  };
+  useEffect(() => {
+    const fetchPersonalPost = async () => {
+      try {
+        setLoading(true);
+        setError(false);
+        const res = await axios.get(url + "API/studyPost/" + title);
+        setPersonalPost(res.data);
+        setPersonalContentsArray(res.data.blogContents);
+        setAmount(res.data.blogContents.length);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchPersonalPost();
+  }, []);
 
   const onContentContentChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -67,9 +80,9 @@ export default function ProjectAdd() {
     ]);
   };
 
-  const addPost = () => {
+  const editPost = () => {
     axios
-      .post(url + "add/personalPost", personalPost, {
+      .post(url + "edit/personalPost", personalPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
@@ -89,6 +102,13 @@ export default function ProjectAdd() {
     });
   };
 
+  if (loading) {
+    return <h3>Loading ...</h3>;
+  }
+  if (error) {
+    return <h3>There has been an error</h3>;
+  }
+
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
@@ -99,7 +119,7 @@ export default function ProjectAdd() {
               <tr>
                 <td>title : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostTitleChange(e)} />
+                  <input type="text" value={personalPost.title} disabled />
                 </td>
               </tr>
             </tbody>
@@ -117,6 +137,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentImageChange(e, i)}
+                          value={personalContentsArray[i].image}
                         />
                       </td>
                     </tr>
@@ -126,6 +147,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentContentChange(e, i)}
+                          value={personalContentsArray[i].content}
                         />
                       </td>
                     </tr>
@@ -135,6 +157,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentCodeChange(e, i)}
+                          value={personalContentsArray[i].code}
                         />
                       </td>
                     </tr>
@@ -147,7 +170,7 @@ export default function ProjectAdd() {
         </div>
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
-        <button onClick={() => addPost()}>Send Post</button>
+        <button onClick={() => editPost()}>Send Post</button>
       </div>
     </div>
   );

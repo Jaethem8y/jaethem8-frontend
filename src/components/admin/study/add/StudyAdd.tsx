@@ -4,12 +4,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { url } from "../../../../config";
 import { StudyPost, StudyContent } from "../../../../types/study";
-import { useRecoilValue } from "recoil";
-import { apiKeyState } from "../../../../recoil/loginState";
 
 export default function ProjectAdd() {
   const [amount, setAmount] = useState(0);
-  const apiKey = useRecoilValue(apiKeyState);
   const [studyPost, setStudyPost] = useState<StudyPost>({
     title: "",
     contents: [],
@@ -73,7 +70,7 @@ export default function ProjectAdd() {
     axios
       .post(url + "add/studyPost", studyPost, {
         headers: {
-          Authorization: "Bearer " + apiKey,
+          Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
       })
       .then((res) => {

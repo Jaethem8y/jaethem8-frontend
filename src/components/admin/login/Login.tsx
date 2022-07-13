@@ -41,6 +41,7 @@ export default function Login() {
       .then((res) => {
         alert("Login Successful");
         setGlobalLoginInfo(res.data.access_token);
+        localStorage.setItem("apiKey", res.data.access_token);
       })
       .catch((err) => {
         console.log(err);

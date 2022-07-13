@@ -16,6 +16,9 @@ import PersonalAdd from "./components/admin/personal/add/PersonalAdd";
 
 import Test from "./components/test/Test";
 import Login from "./components/admin/login/Login";
+import ProjectEdit from "./components/admin/project/edit/ProjectEdit";
+import PersonalEdit from "./components/admin/personal/edit/PersonalEdit";
+import StudyEdit from "./components/admin/study/edit/StudyEdit";
 
 function App() {
   return (
@@ -29,13 +32,16 @@ function App() {
             <Route path="/admin/login" element={<Login />} />
 
             <Route path="/admin/study/add" element={<StudyAdd />} />
-            <Route path="/admin/study/edit/:titile" />
+            <Route path="/admin/study/edit/:titile" element={<StudyEdit />}/>
 
             <Route path="/admin/projects/add" element={<ProjectAdd />} />
-            <Route path="/admin/projects/edit/:title" />
+            <Route
+              path="/admin/projects/edit/:title"
+              element={<ProjectEdit />}
+            />
 
             <Route path="/admin/personal/add" element={<PersonalAdd />} />
-            <Route path="/admin/personal/edit/:title" />
+            <Route path="/admin/personal/edit/:title" element={<PersonalEdit />}/>
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/courses" element={<Courses />} />

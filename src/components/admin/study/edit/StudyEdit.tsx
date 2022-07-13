@@ -1,63 +1,76 @@
-import "./personalAdd.scss";
+import "./studyAdd.scss";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { url } from "../../../../config";
-import { PersonalPost, PersonalContent } from "../../../../types/personal";
+import { useParams } from "react-router-dom";
 
+import { url } from "../../../../config";
+import { StudyPost, StudyContent } from "../../../../types/study";
 
 export default function ProjectAdd() {
+  const { title } = useParams();
   const [amount, setAmount] = useState(0);
-  const [personalPost, setPersonalPost] = useState<PersonalPost>({
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [studyPost, setStudyPost] = useState<StudyPost>({
     title: "",
     contents: [],
   });
-  const [personalContentsArray, setPersonalContentsArray] = useState<
-    Array<PersonalContent>
+  const [studyContentsArray, setStudyContentsArray] = useState<
+    Array<StudyContent>
   >([]);
 
-  const onPostTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPersonalPost({
-      ...personalPost,
-      title: e.target.value,
-    });
-  };
+  useEffect(() => {
+    const fetchStudyPost = async () => {
+      try {
+        setLoading(true);
+        setError(false);
+        const res = await axios.get(url + "API/studyPost/" + title);
+        setStudyPost(res.data);
+        setStudyContentsArray(res.data.blogContents);
+        setAmount(res.data.blogContents.length);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchStudyPost();
+  }, []);
 
   const onContentContentChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     i: number
   ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], content: e.target.value },
-      ...personalContentsArray.slice(i + 1),
+    setStudyContentsArray([
+      ...studyContentsArray.slice(0, i),
+      { ...studyContentsArray[i], content: e.target.value },
+      ...studyContentsArray.slice(i + 1),
     ]);
   };
   const onContentImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     i: number
   ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], image: e.target.value },
-      ...personalContentsArray.slice(i + 1),
+    setStudyContentsArray([
+      ...studyContentsArray.slice(0, i),
+      { ...studyContentsArray[i], image: e.target.value },
+      ...studyContentsArray.slice(i + 1),
     ]);
   };
   const onContentCodeChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     i: number
   ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], code: e.target.value },
-      ...personalContentsArray.slice(i + 1),
+    setStudyContentsArray([
+      ...studyContentsArray.slice(0, i),
+      { ...studyContentsArray[i], code: e.target.value },
+      ...studyContentsArray.slice(i + 1),
     ]);
   };
 
   const addMoreContent = () => {
     setAmount((amount) => amount + 1);
-    setPersonalContentsArray([
-      ...personalContentsArray,
+    setStudyContentsArray([
+      ...studyContentsArray,
       {
         location: amount,
         content: "",
@@ -67,9 +80,9 @@ export default function ProjectAdd() {
     ]);
   };
 
-  const addPost = () => {
+  const editPost = () => {
     axios
-      .post(url + "add/personalPost", personalPost, {
+      .post(url + "edit/studyPost", studyPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
@@ -78,16 +91,24 @@ export default function ProjectAdd() {
         alert("Post Has been Created Successfully !");
       })
       .catch((err) => {
+        console.log(err);
         alert("Failed to Create a Post !");
       });
   };
 
   const capturePost = () => {
-    setPersonalPost({
-      ...personalPost,
-      contents: personalContentsArray,
+    setStudyPost({
+      ...studyPost,
+      contents: studyContentsArray,
     });
   };
+
+  if (loading) {
+    return <h3>Loading ...</h3>;
+  }
+  if (error) {
+    return <h3>There has been an error</h3>;
+  }
 
   return (
     <div className="add-project-wrapper">
@@ -99,7 +120,7 @@ export default function ProjectAdd() {
               <tr>
                 <td>title : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostTitleChange(e)} />
+                  <input type="text" value={studyPost.title} disabled />
                 </td>
               </tr>
             </tbody>
@@ -117,6 +138,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentImageChange(e, i)}
+                          value={studyContentsArray[i].image}
                         />
                       </td>
                     </tr>
@@ -126,6 +148,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentContentChange(e, i)}
+                          value={studyContentsArray[i].content}
                         />
                       </td>
                     </tr>
@@ -135,6 +158,7 @@ export default function ProjectAdd() {
                         <input
                           type="text"
                           onChange={(e) => onContentCodeChange(e, i)}
+                          value={studyContentsArray[i].code}
                         />
                       </td>
                     </tr>
@@ -147,7 +171,7 @@ export default function ProjectAdd() {
         </div>
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
-        <button onClick={() => addPost()}>Send Post</button>
+        <button onClick={() => editPost()}>Send Post</button>
       </div>
     </div>
   );
