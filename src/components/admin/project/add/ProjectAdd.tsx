@@ -1,25 +1,15 @@
 import "./projectAdd.scss";
 
-import React, { useState, useRef } from "react";
-
-type BlogContent = {
-  location: number;
-  content: string;
-  image: string;
-  code: string;
-};
-
-type BlogPost = {
-  title: string;
-  role: string;
-  frontend: string;
-  backend: string;
-  general: string;
-  contents: Array<BlogContent>;
-};
+import React, { useState } from "react";
+import axios from "axios";
+import { url } from "../../../../config";
+import { BlogPost, BlogContent } from "../../../../types/blog";
+import { useRecoilValue } from "recoil";
+import { apiKeyState } from "../../../../recoil/loginState";
 
 export default function ProjectAdd() {
   const [amount, setAmount] = useState(0);
+  const apiKey = useRecoilValue(apiKeyState);
   const [blogPost, setBlogPost] = useState<BlogPost>({
     title: "",
     role: "",
@@ -107,6 +97,22 @@ export default function ProjectAdd() {
     ]);
   };
 
+  const addPost = () => {
+    axios
+      .post(url + "add/blogPost", blogPost, {
+        headers: {
+          Authorization: "Bearer " + apiKey,
+        },
+      })
+      .then((res) => {
+        alert("Post Has been Created Successfully !");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Failed to Create a Post !");
+      });
+  };
+
   const capturePost = () => {
     setBlogPost({
       ...blogPost,
@@ -119,7 +125,7 @@ export default function ProjectAdd() {
     <div className="add-project-wrapper">
       <div className="add-project-content">
         <h3>Add a Project Post</h3>
-        <div className="add-porject-post">
+        <div className="add-project-post">
           <table>
             <tbody>
               <tr>
@@ -198,7 +204,9 @@ export default function ProjectAdd() {
           })}
           <button onClick={() => addMoreContent()}>Add More Content</button>
         </div>
-        <button onClick={() => capturePost()}>CapturePost</button>
+        <button onClick={() => capturePost()}>CapturePost Click Twice</button>
+        <br />
+        <button onClick={() => addPost()}>Send Post</button>
       </div>
     </div>
   );
