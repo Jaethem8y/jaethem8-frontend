@@ -39,7 +39,7 @@ export default function ProjectAdd() {
   }, []);
 
   const onContentContentChange = (
-    e: React.ChangeEvent<HTMLtextAreaElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
@@ -153,7 +153,8 @@ export default function ProjectAdd() {
           </table>
           {Array.from(Array(amount), (el, i) => {
             return (
-              <div className="add-project-objecs" key={i}>s
+              <div className="add-project-objecs" key={i}>
+                s
                 <hr />
                 <h5>Add More Content</h5>
                 <table>

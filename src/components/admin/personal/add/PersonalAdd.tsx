@@ -23,7 +23,7 @@ export default function ProjectAdd() {
   };
 
   const onContentContentChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
@@ -43,7 +43,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentImageChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement>,
     i: number
   ) => {
     setPersonalContentsArray([
