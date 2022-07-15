@@ -50,8 +50,18 @@ export default function ProjectAdd() {
     });
   };
 
-  const onContentContentChange = (
+  const onContentHeaderChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setBlogContentsArray([
+      ...blogContentsArray.slice(0, i),
+      { ...blogContentsArray[i], header: e.target.value },
+      ...blogContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentContentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setBlogContentsArray([
@@ -71,7 +81,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setBlogContentsArray([
@@ -87,6 +97,7 @@ export default function ProjectAdd() {
       ...blogContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -167,6 +178,15 @@ export default function ProjectAdd() {
                 <table>
                   <tbody>
                     <tr>
+                      <td>Header: </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Image : </td>
                       <td>
                         <input
@@ -178,8 +198,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                         />
                       </td>
@@ -187,10 +206,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
-                          onChange={(e) => onContentCodeChange(e, i)}
-                        />
+                        <textarea onChange={(e) => onContentCodeChange(e, i)} />
                       </td>
                     </tr>
                   </tbody>

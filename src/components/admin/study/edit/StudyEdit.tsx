@@ -1,4 +1,4 @@
-import "./studyAdd.scss";
+import "./studyEdit.scss";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -26,18 +26,31 @@ export default function ProjectAdd() {
         setLoading(true);
         setError(false);
         const res = await axios.get(url + "API/studyPost/" + title);
+        console.log("here", res.data);
         setStudyPost(res.data);
-        setStudyContentsArray(res.data.blogContents);
-        setAmount(res.data.blogContents.length);
+        setStudyContentsArray(res.data.studyContents);
+        setAmount(res.data.studyContents.length);
+        setLoading(false);
       } catch (e) {
+        setError(true);
         console.log(e);
       }
     };
     fetchStudyPost();
   }, []);
 
-  const onContentContentChange = (
+  const onContentHeaderChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setStudyContentsArray([
+      ...studyContentsArray.slice(0, i),
+      { ...studyContentsArray[i], header: e.target.value },
+      ...studyContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentContentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setStudyContentsArray([
@@ -57,7 +70,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setStudyContentsArray([
@@ -73,6 +86,7 @@ export default function ProjectAdd() {
       ...studyContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -96,6 +110,21 @@ export default function ProjectAdd() {
       });
   };
 
+  const deletePost = () => {
+    axios
+      .post(url + "delete/studyPost", studyPost, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("apiKey"),
+        },
+      })
+      .then((res) => {
+        alert("Post Has been Deleted Successfully !");
+      })
+      .catch((err) => {
+        alert("Failed to Delete a Post !");
+      });
+  };
+
   const capturePost = () => {
     setStudyPost({
       ...studyPost,
@@ -113,7 +142,7 @@ export default function ProjectAdd() {
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
-        <h3>Add a Project Post</h3>
+        <h3>Edit a Study Post</h3>
         <div className="add-project-post">
           <table>
             <tbody>
@@ -133,6 +162,16 @@ export default function ProjectAdd() {
                 <table>
                   <tbody>
                     <tr>
+                      <td>Header : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                          value={studyContentsArray[i].header}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Image : </td>
                       <td>
                         <input
@@ -145,8 +184,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                           value={studyContentsArray[i].content}
                         />
@@ -155,8 +193,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentCodeChange(e, i)}
                           value={studyContentsArray[i].code}
                         />
@@ -172,6 +209,8 @@ export default function ProjectAdd() {
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
         <button onClick={() => editPost()}>Send Post</button>
+        <br />
+        <button onClick={() => deletePost()}>Delete Post</button>
       </div>
     </div>
   );

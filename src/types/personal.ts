@@ -1,5 +1,6 @@
 export type PersonalContent = {
   location: number;
+  header:string;
   content: string;
   image: string;
   code: string;

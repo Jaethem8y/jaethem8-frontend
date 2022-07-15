@@ -33,7 +33,9 @@ export default function ProjectEdit() {
         setBlogPost(res.data);
         setBlogContentsArray(res.data.blogContents);
         setAmount(res.data.blogContents.length);
+        setLoading(false);
       } catch (e) {
+        setError(true);
         console.log(e);
       }
     };
@@ -65,8 +67,18 @@ export default function ProjectEdit() {
     });
   };
 
-  const onContentContentChange = (
+  const onContentHeaderChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setBlogContentsArray([
+      ...blogContentsArray.slice(0, i),
+      { ...blogContentsArray[i], header: e.target.value },
+      ...blogContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentContentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setBlogContentsArray([
@@ -86,7 +98,7 @@ export default function ProjectEdit() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setBlogContentsArray([
@@ -102,6 +114,7 @@ export default function ProjectEdit() {
       ...blogContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -125,6 +138,21 @@ export default function ProjectEdit() {
       });
   };
 
+  const deletePost = () => {
+    axios
+      .post(url + "delete/blogPost", blogPost, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("apiKey"),
+        },
+      })
+      .then((res) => {
+        alert("Post Has been Deleted Successfully !");
+      })
+      .catch((err) => {
+        alert("Failed to Delete a Post !");
+      });
+  };
+
   const capturePost = () => {
     setBlogPost({
       ...blogPost,
@@ -142,7 +170,7 @@ export default function ProjectEdit() {
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
-        <h3>Add a Project Post</h3>
+        <h3>Edit a Project Post</h3>
         <div className="add-project-post">
           <table>
             <tbody>
@@ -202,6 +230,16 @@ export default function ProjectEdit() {
                 <table>
                   <tbody>
                     <tr>
+                      <td>Header : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                          value={blogContentsArray[i].header}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Image : </td>
                       <td>
                         <input
@@ -214,8 +252,7 @@ export default function ProjectEdit() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                           value={blogContentsArray[i].content}
                         />
@@ -224,8 +261,7 @@ export default function ProjectEdit() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentCodeChange(e, i)}
                           value={blogContentsArray[i].code}
                         />
@@ -241,6 +277,8 @@ export default function ProjectEdit() {
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
         <button onClick={() => editPost()}>Send Post</button>
+        <br />
+        <button onClick={() => deletePost()}>Delete Post</button>
       </div>
     </div>
   );

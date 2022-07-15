@@ -1,5 +1,6 @@
 export type StudyContent = {
   location: number;
+  header;
   content: string;
   image: string;
   code: string;

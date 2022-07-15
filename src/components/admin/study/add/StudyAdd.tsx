@@ -22,8 +22,18 @@ export default function ProjectAdd() {
     });
   };
 
-  const onContentContentChange = (
+  const onContentHeaderChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setStudyContentsArray([
+      ...studyContentsArray.slice(0, i),
+      { ...studyContentsArray[i], header: e.target.value },
+      ...studyContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentContentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setStudyContentsArray([
@@ -43,7 +53,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setStudyContentsArray([
@@ -59,6 +69,7 @@ export default function ProjectAdd() {
       ...studyContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -93,7 +104,7 @@ export default function ProjectAdd() {
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
-        <h3>Add a Project Post</h3>
+        <h3>Add a Study Post</h3>
         <div className="add-project-post">
           <table>
             <tbody>
@@ -113,6 +124,15 @@ export default function ProjectAdd() {
                 <table>
                   <tbody>
                     <tr>
+                      <td>Header : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Image : </td>
                       <td>
                         <input
@@ -124,8 +144,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                         />
                       </td>
@@ -133,10 +152,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
-                          onChange={(e) => onContentCodeChange(e, i)}
-                        />
+                        <textarea onChange={(e) => onContentCodeChange(e, i)} />
                       </td>
                     </tr>
                   </tbody>

@@ -5,7 +5,6 @@ import axios from "axios";
 import { url } from "../../../../config";
 import { PersonalPost, PersonalContent } from "../../../../types/personal";
 
-
 export default function ProjectAdd() {
   const [amount, setAmount] = useState(0);
   const [personalPost, setPersonalPost] = useState<PersonalPost>({
@@ -33,8 +32,18 @@ export default function ProjectAdd() {
       ...personalContentsArray.slice(i + 1),
     ]);
   };
-  const onContentImageChange = (
+  const onContentHeaderChange = (
     e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setPersonalContentsArray([
+      ...personalContentsArray.slice(0, i),
+      { ...personalContentsArray[i], header: e.target.value },
+      ...personalContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentImageChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
@@ -44,7 +53,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
@@ -60,6 +69,7 @@ export default function ProjectAdd() {
       ...personalContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -92,7 +102,7 @@ export default function ProjectAdd() {
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
-        <h3>Add a Project Post</h3>
+        <h3>Add a Personal Post</h3>
         <div className="add-project-post">
           <table>
             <tbody>
@@ -112,6 +122,15 @@ export default function ProjectAdd() {
                 <table>
                   <tbody>
                     <tr>
+                      <td>Header : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Image : </td>
                       <td>
                         <input
@@ -123,8 +142,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                         />
                       </td>
@@ -132,10 +150,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
-                          onChange={(e) => onContentCodeChange(e, i)}
-                        />
+                        <textarea onChange={(e) => onContentCodeChange(e, i)} />
                       </td>
                     </tr>
                   </tbody>

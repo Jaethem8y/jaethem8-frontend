@@ -32,7 +32,7 @@ function App() {
             <Route path="/admin/login" element={<Login />} />
 
             <Route path="/admin/study/add" element={<StudyAdd />} />
-            <Route path="/admin/study/edit/:titile" element={<StudyEdit />}/>
+            <Route path="/admin/study/edit/:title" element={<StudyEdit />} />
 
             <Route path="/admin/projects/add" element={<ProjectAdd />} />
             <Route
@@ -41,7 +41,10 @@ function App() {
             />
 
             <Route path="/admin/personal/add" element={<PersonalAdd />} />
-            <Route path="/admin/personal/edit/:title" element={<PersonalEdit />}/>
+            <Route
+              path="/admin/personal/edit/:title"
+              element={<PersonalEdit />}
+            />
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/courses" element={<Courses />} />

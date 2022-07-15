@@ -1,4 +1,4 @@
-import "./personalAdd.scss";
+import "./personalEdit.scss";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -25,11 +25,13 @@ export default function ProjectAdd() {
       try {
         setLoading(true);
         setError(false);
-        const res = await axios.get(url + "API/studyPost/" + title);
+        const res = await axios.get(url + "API/personalPost/" + title);
         setPersonalPost(res.data);
-        setPersonalContentsArray(res.data.blogContents);
-        setAmount(res.data.blogContents.length);
+        setPersonalContentsArray(res.data.personalContents);
+        setAmount(res.data.personalContents.length);
+        setLoading(false);
       } catch (e) {
+        setError(true);
         console.log(e);
       }
     };
@@ -37,12 +39,22 @@ export default function ProjectAdd() {
   }, []);
 
   const onContentContentChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLtextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
       ...personalContentsArray.slice(0, i),
       { ...personalContentsArray[i], content: e.target.value },
+      ...personalContentsArray.slice(i + 1),
+    ]);
+  };
+  const onContentHeaderChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setPersonalContentsArray([
+      ...personalContentsArray.slice(0, i),
+      { ...personalContentsArray[i], header: e.target.value },
       ...personalContentsArray.slice(i + 1),
     ]);
   };
@@ -57,7 +69,7 @@ export default function ProjectAdd() {
     ]);
   };
   const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement>,
     i: number
   ) => {
     setPersonalContentsArray([
@@ -73,6 +85,7 @@ export default function ProjectAdd() {
       ...personalContentsArray,
       {
         location: amount,
+        header: "",
         content: "",
         image: "",
         code: "",
@@ -94,6 +107,20 @@ export default function ProjectAdd() {
         alert("Failed to Create a Post !");
       });
   };
+  const deletePost = () => {
+    axios
+      .post(url + "delete/personalPost", personalPost, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("apiKey"),
+        },
+      })
+      .then((res) => {
+        alert("Post Has been Deleted Successfully !");
+      })
+      .catch((err) => {
+        alert("Failed to Delete a Post !");
+      });
+  };
 
   const capturePost = () => {
     setPersonalPost({
@@ -112,7 +139,7 @@ export default function ProjectAdd() {
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
-        <h3>Add a Project Post</h3>
+        <h3>Edit a Personal Post</h3>
         <div className="add-project-post">
           <table>
             <tbody>
@@ -126,11 +153,21 @@ export default function ProjectAdd() {
           </table>
           {Array.from(Array(amount), (el, i) => {
             return (
-              <div className="add-project-objecs" key={i}>
+              <div className="add-project-objecs" key={i}>s
                 <hr />
                 <h5>Add More Content</h5>
                 <table>
                   <tbody>
+                    <tr>
+                      <td>Header : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentHeaderChange(e, i)}
+                          value={personalContentsArray[i].header}
+                        />
+                      </td>
+                    </tr>
                     <tr>
                       <td>Image : </td>
                       <td>
@@ -144,8 +181,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Content : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentContentChange(e, i)}
                           value={personalContentsArray[i].content}
                         />
@@ -154,8 +190,7 @@ export default function ProjectAdd() {
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <input
-                          type="text"
+                        <textarea
                           onChange={(e) => onContentCodeChange(e, i)}
                           value={personalContentsArray[i].code}
                         />
@@ -171,6 +206,8 @@ export default function ProjectAdd() {
         <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
         <button onClick={() => editPost()}>Send Post</button>
+        <br />
+        <button onClick={() => deletePost()}>Delete Post</button>
       </div>
     </div>
   );
