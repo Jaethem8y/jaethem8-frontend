@@ -67,43 +67,16 @@ export default function ProjectEdit() {
     });
   };
 
-  const onContentHeaderChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
+  const onContentChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    i: number,
+    t: string
   ) => {
     setBlogContentsArray([
       ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], header: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentContentChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], content: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentImageChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], image: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], code: e.target.value },
+      { ...blogContentsArray[i], [t]: e.target.value },
       ...blogContentsArray.slice(i + 1),
     ]);
   };
@@ -116,6 +89,7 @@ export default function ProjectEdit() {
         location: amount,
         header: "",
         content: "",
+        link: "",
         image: "",
         code: "",
       },
@@ -234,7 +208,7 @@ export default function ProjectEdit() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentHeaderChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "header")}
                           value={blogContentsArray[i].header}
                         />
                       </td>
@@ -244,8 +218,18 @@ export default function ProjectEdit() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentImageChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "image")}
                           value={blogContentsArray[i].image}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Link : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentChange(e, i, "link")}
+                          value={blogContentsArray[i].link}
                         />
                       </td>
                     </tr>
@@ -253,7 +237,7 @@ export default function ProjectEdit() {
                       <td>Content : </td>
                       <td>
                         <textarea
-                          onChange={(e) => onContentContentChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "content")}
                           value={blogContentsArray[i].content}
                         />
                       </td>
@@ -262,7 +246,7 @@ export default function ProjectEdit() {
                       <td>Code : </td>
                       <td>
                         <textarea
-                          onChange={(e) => onContentCodeChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "code")}
                           value={blogContentsArray[i].code}
                         />
                       </td>

@@ -1,0 +1,23 @@
+.view-project-wrapper {
+  margin-top: 7em;
+  min-height: 88vh;
+  .view-project-content {
+    margin: 3em;
+    margin-left: 10em;
+    .view-project-post {
+      margin-left: 2em;
+      .view-project-content {
+        margin: 0;
+        width: 80%;
+        .view-project-post {
+        }
+      }
+    }
+  }
+}
+p,
+b,
+h4 {
+  margin: 0;
+  padding: 0;
+}

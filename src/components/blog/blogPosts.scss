@@ -1,0 +1,27 @@
+.view-project-wrapper {
+  margin-top: 7em;
+  min-height: 88vh;
+  .view-project-content {
+    margin: 3em;
+    margin-left: 10em;
+    .view-project-post {
+      margin-left: 2em;
+      padding: 1em;
+      .view-project-content {
+        margin: 1em;
+        width: 80%;
+        border: 1px black;
+      }
+    }
+  }
+}
+input,
+textarea {
+  width: 400px;
+}
+input {
+  height: 30px;
+}
+textarea {
+  height: 200px;
+}

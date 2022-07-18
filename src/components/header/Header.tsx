@@ -32,9 +32,6 @@ export default function Header() {
               <Nav.Link href="/projects" className="header-nav">
                 Projects
               </Nav.Link>
-              <Nav.Link href="/contact" className="header-nav">
-                Resume/Contact
-              </Nav.Link>
               <a
                 href="https://github.com/Jaethem8y?tab=repositories"
                 target="_blank"
@@ -42,6 +39,14 @@ export default function Header() {
                 className="header-a-github text-secondary header-nav"
               >
                 Github
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jaehyeok-choi-4ab691220/"
+                target="_blank"
+                rel="noreferrer"
+                className="header-a-github text-secondary header-nav"
+              >
+                LinkedIn
               </a>
             </Nav>
           </Navbar.Collapse>

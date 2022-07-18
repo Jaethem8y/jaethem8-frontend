@@ -16,15 +16,18 @@ export default function Home() {
         <div className="home-right-textbox">
           <h5 className="home-welcom-message">
             <code>
-              Welcome to portfolio/study log for growth/progress in my journey
-              to software engineering.
+              Welcome to my growth/progress in my journey to software
+              engineering.
+              <br />
+              Each nav link's leads to
               <br />
               <br />
               - Courses: View courses that I have taken
-              <br />- Study: View my progress log in algorithm/coding
-              <br />- Projects: View my Projects
+              <br />- Study: View my progress log in algorithm/programming
+              <br />- Projects: View the explanations for the Projects
               <br />- Resume/Contact: View my resume and contact info
               <br />- Github: Direct link to my github repo
+              <br />- LinkedIn: Direct link to my LinkedIn profile
             </code>
           </h5>
         </div>

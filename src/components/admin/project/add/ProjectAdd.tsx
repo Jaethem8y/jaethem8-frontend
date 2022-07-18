@@ -43,50 +43,23 @@ export default function ProjectAdd() {
       backend: e.target.value,
     });
   };
-  const onPostGeneralChagne = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onPostGeneralChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBlogPost({
       ...blogPost,
       general: e.target.value,
     });
   };
 
-  const onContentHeaderChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
+  const onContentChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    i: number,
+    t: string
   ) => {
     setBlogContentsArray([
       ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], header: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentContentChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], content: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentImageChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], image: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], code: e.target.value },
+      { ...blogContentsArray[i], [t]: e.target.value },
       ...blogContentsArray.slice(i + 1),
     ]);
   };
@@ -99,6 +72,7 @@ export default function ProjectAdd() {
         location: amount,
         header: "",
         content: "",
+        link: "",
         image: "",
         code: "",
       },
@@ -126,6 +100,8 @@ export default function ProjectAdd() {
       ...blogPost,
       contents: blogContentsArray,
     });
+    console.log(blogPost);
+
   };
 
   return (
@@ -165,7 +141,7 @@ export default function ProjectAdd() {
               <tr>
                 <td>general : </td>
                 <td>
-                  <input type="text" onChange={(e) => onPostGeneralChagne(e)} />
+                  <input type="text" onChange={(e) => onPostGeneralChange(e)} />
                 </td>
               </tr>
             </tbody>
@@ -182,7 +158,7 @@ export default function ProjectAdd() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentHeaderChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "header")}
                         />
                       </td>
                     </tr>
@@ -191,7 +167,16 @@ export default function ProjectAdd() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentImageChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "image")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Link : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentChange(e, i, "link")}
                         />
                       </td>
                     </tr>
@@ -199,14 +184,16 @@ export default function ProjectAdd() {
                       <td>Content : </td>
                       <td>
                         <textarea
-                          onChange={(e) => onContentContentChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "content")}
                         />
                       </td>
                     </tr>
                     <tr>
                       <td>Code : </td>
                       <td>
-                        <textarea onChange={(e) => onContentCodeChange(e, i)} />
+                        <textarea
+                          onChange={(e) => onContentChange(e, i, "code")}
+                        />
                       </td>
                     </tr>
                   </tbody>

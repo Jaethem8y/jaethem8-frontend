@@ -38,43 +38,16 @@ export default function ProjectAdd() {
     fetchPersonalPost();
   }, []);
 
-  const onContentContentChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
+  const onContentChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+    i: number,
+    t: string
   ) => {
     setPersonalContentsArray([
       ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], content: e.target.value },
-      ...personalContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentHeaderChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
-  ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], header: e.target.value },
-      ...personalContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentImageChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number
-  ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], image: e.target.value },
-      ...personalContentsArray.slice(i + 1),
-    ]);
-  };
-  const onContentCodeChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    i: number
-  ) => {
-    setPersonalContentsArray([
-      ...personalContentsArray.slice(0, i),
-      { ...personalContentsArray[i], code: e.target.value },
+      { ...personalContentsArray[i], [t]: e.target.value },
       ...personalContentsArray.slice(i + 1),
     ]);
   };
@@ -87,6 +60,7 @@ export default function ProjectAdd() {
         location: amount,
         header: "",
         content: "",
+        link: "",
         image: "",
         code: "",
       },
@@ -164,7 +138,7 @@ export default function ProjectAdd() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentHeaderChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "header")}
                           value={personalContentsArray[i].header}
                         />
                       </td>
@@ -174,8 +148,18 @@ export default function ProjectAdd() {
                       <td>
                         <input
                           type="text"
-                          onChange={(e) => onContentImageChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "image")}
                           value={personalContentsArray[i].image}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Link : </td>
+                      <td>
+                        <input
+                          type="text"
+                          onChange={(e) => onContentChange(e, i, "link")}
+                          value={personalContentsArray[i].link}
                         />
                       </td>
                     </tr>
@@ -183,7 +167,7 @@ export default function ProjectAdd() {
                       <td>Content : </td>
                       <td>
                         <textarea
-                          onChange={(e) => onContentContentChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "content")}
                           value={personalContentsArray[i].content}
                         />
                       </td>
@@ -192,7 +176,7 @@ export default function ProjectAdd() {
                       <td>Code : </td>
                       <td>
                         <textarea
-                          onChange={(e) => onContentCodeChange(e, i)}
+                          onChange={(e) => onContentChange(e, i, "code")}
                           value={personalContentsArray[i].code}
                         />
                       </td>

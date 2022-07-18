@@ -2,6 +2,7 @@ export type PersonalContent = {
   location: number;
   header:string;
   content: string;
+  link:string;
   image: string;
   code: string;
 };

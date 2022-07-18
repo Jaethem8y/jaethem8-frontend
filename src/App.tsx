@@ -8,13 +8,15 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import Courses from "./components/courses/Courses";
-import Resume from "./components/resume/Resume";
 import Admin from "./components/admin/Admin";
 import ProjectAdd from "./components/admin/project/add/ProjectAdd";
 import StudyAdd from "./components/admin/study/add/StudyAdd";
 import PersonalAdd from "./components/admin/personal/add/PersonalAdd";
+import BlogPosts from "./components/blog/BlogPosts";
+import BlogPost from "./components/blog/content/BlogPost";
+import StudyPosts from "./components/study/StudyPosts";
+import StudyPost from "./components/study/content/StudyPost";
 
-import Test from "./components/test/Test";
 import Login from "./components/admin/login/Login";
 import ProjectEdit from "./components/admin/project/edit/ProjectEdit";
 import PersonalEdit from "./components/admin/personal/edit/PersonalEdit";
@@ -27,8 +29,6 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/test" element={<Test />} />
-
             <Route path="/admin/login" element={<Login />} />
 
             <Route path="/admin/study/add" element={<StudyAdd />} />
@@ -48,9 +48,13 @@ function App() {
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/courses" element={<Courses />} />
-            <Route path="/study" />
-            <Route path="/projects" />
-            <Route path="/contact" element={<Resume />} />
+
+            <Route path="/study" element={<StudyPosts />} />
+            <Route path="/study/:title" element={<StudyPost />} />
+
+            <Route path="/projects" element={<BlogPosts />} />
+            <Route path="/project/:title" element={<BlogPost />} />
+
             <Route path="/" element={<Home />} />
           </Routes>
           <Footer />
