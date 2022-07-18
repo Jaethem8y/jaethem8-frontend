@@ -1,27 +1,16 @@
-.view-project-wrapper {
+.view-post-wrapper {
   margin-top: 7em;
   min-height: 88vh;
-  .view-project-content {
-    margin: 3em;
-    margin-left: 10em;
-    .view-project-post {
-      margin-left: 2em;
-      padding: 1em;
-      .view-project-content {
-        margin: 1em;
-        width: 80%;
-        border: 1px black;
-      }
-    }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .view-post-outer {
+    min-width: 80%;
+    padding: 1em;
+   
   }
 }
-input,
-textarea {
-  width: 400px;
-}
-input {
-  height: 30px;
-}
-textarea {
-  height: 200px;
+h3,
+p {
+  word-wrap: break-word;
 }

@@ -56,14 +56,14 @@ export default function BlogPosts() {
     );
   }
   return (
-    <div className="view-project-wrapper">
-      <div className="view-project-content">
+    <div className="view-post-wrapper">
+      <div className="view-post-outer">
         <h3>List of Projects</h3>
-        <div className="view-project-post">
+        <div className="view-post-post">
           {blogPosts.map((post) => {
             return (
               <Link key={post.title} to={"/project/" + post.title}>
-                <div className="view-project-content">
+                <div className="view-project-inside">
                   <hr />
                   <h3>{post.title}</h3>
                   <p>

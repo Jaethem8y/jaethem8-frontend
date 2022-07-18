@@ -59,12 +59,12 @@ export default function BlogPosts() {
     );
   }
   return (
-    <div className="view-project-wrapper">
-      <div className="view-project-content">
+    <div className="view-content-wrapper">
+      <div className="view-content-content">
         <h3>Project Name : {studyPost.title}</h3>
         {studyContents.map((content, i) => {
           return (
-            <div className="view-project-post" key={i}>
+            <div className="view-content-post" key={i}>
               <h4>{content.header}</h4>
               <p>{content.content}</p>
               <p>
