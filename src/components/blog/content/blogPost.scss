@@ -14,9 +14,20 @@
   }
 }
 p,
-b,
-h4 {
+b {
   margin: 0;
   padding: 0;
   word-wrap: break-word;
+}
+h4 {
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  word-wrap: break-word;
+}
+img {
+  text-align: center;
+  margin: 1em;
+  max-width: 60%;
+  height: auto;
 }

@@ -75,13 +75,16 @@ export default function BlogPosts() {
         {blogContents.map((content, i) => {
           return (
             <div className="view-content-inside" key={i}>
-              <h4>{content.header}</h4>
-              <p>{content.content}</p>
-              <p>
-                <a href={content.link}>{content.link}</a>
-              </p>
-              <code>{content.code}</code>
-              <img src={content.image} alt="" />
+              {content.header !== "" && <h4>{content.header}</h4>}
+              {content.content !== "" && <p>{content.content}</p>}
+              {content.link !== "" && (
+                <p>
+                  <a href={content.link}>{content.link}</a>
+                </p>
+              )}
+
+              {content.code !== "" && <code>content.code</code>}
+              {content.image !== "" && <img src={content.image} alt="" />}
             </div>
           );
         })}
