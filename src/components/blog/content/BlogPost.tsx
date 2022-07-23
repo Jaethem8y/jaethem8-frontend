@@ -83,7 +83,7 @@ export default function BlogPosts() {
                 </p>
               )}
 
-              {content.code !== "" && <code>content.code</code>}
+              {content.code !== "" && <code>{content.code}</code>}
               {content.image !== "" && <img src={content.image} alt="" />}
             </div>
           );
