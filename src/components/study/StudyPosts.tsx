@@ -19,6 +19,7 @@ export default function BlogPosts() {
         setError(false);
         const res = await axios.get(url + "API/studyPost/");
         setStudyPosts(res.data);
+        console.log(res.data);
         setLoading(false);
       } catch (e) {
         setError(true);
@@ -39,18 +40,18 @@ export default function BlogPosts() {
   }
   if (error) {
     return (
-      <div className="view-project-wrapper">
-        <div className="view-project-content">
+      <div className="view-post-wrapper">
+        <div className="view-post-content">
           <p>There has been an error ...</p>
         </div>
       </div>
     );
   }
-  if (studyPosts === [] || studyPosts === null) {
+  if (studyPosts.length === 0 || studyPosts === null) {
     return (
-      <div className="view-project-wrapper">
-        <div className="view-project-content">
-          <p>There is no contents yet ...</p>
+      <div className="view-post-wrapper">
+        <div className="view-post-content">
+          <h3>There is no contents yet for study ...</h3>
         </div>
       </div>
     );

@@ -4,9 +4,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  .view-post-outer {
-    min-width: 80%;
-    padding: 1em;
+  .view-post-content {
+    width: 80%;
+    .view-post-outer {
+      min-width: 100%;
+      padding: 1em;
+    }
   }
 }
 h3,
