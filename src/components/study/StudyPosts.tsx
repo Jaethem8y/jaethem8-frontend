@@ -58,7 +58,7 @@ export default function BlogPosts() {
   return (
     <div className="view-post-wrapper">
       <div className="view-post-content">
-        <h3>List of Projects</h3>
+        <h3>List of Study Post</h3>
         <div className="view-post-post">
           {studyPosts.map((post) => {
             return (
