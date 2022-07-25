@@ -30,8 +30,8 @@ export default function BlogPosts() {
 
   if (loading) {
     return (
-      <div className="view-project-wrapper">
-        <div className="view-project-content">
+      <div className="view-post-wrapper">
+        <div className="view-post-content">
           <p>Loading ... </p>
         </div>
       </div>
@@ -39,8 +39,8 @@ export default function BlogPosts() {
   }
   if (error) {
     return (
-      <div className="view-project-wrapper">
-        <div className="view-project-content">
+      <div className="view-post-wrapper">
+        <div className="view-post-content">
           <p>There has been an error ...</p>
         </div>
       </div>
@@ -48,8 +48,8 @@ export default function BlogPosts() {
   }
   if (blogPosts === [] || blogPosts === null) {
     return (
-      <div className="view-project-wrapper">
-        <div className="view-project-content">
+      <div className="view-post-wrapper">
+        <div className="view-post-content">
           <p>There is no contents yet ...</p>
         </div>
       </div>
