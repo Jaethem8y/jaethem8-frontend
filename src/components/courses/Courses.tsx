@@ -83,7 +83,7 @@ export default function Courses() {
           also covers functional and logic languages.
         </p>
         <p className="text-secondary">
-          <b>CS 130: Computer Org and Assembly Language</b>
+          <b>CS 130: Computer Org and Assembly Language </b>
           <br />- Computer organization and architecture; internal
           representation of programs and data; assembly language programming;
           addressing techniques; macros; assemblers; linking; input/output

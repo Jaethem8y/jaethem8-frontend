@@ -3,83 +3,165 @@ import "./projectAdd.scss";
 import React, { useState } from "react";
 import axios from "axios";
 import { url } from "../../../../config";
-import { BlogPost, BlogContent } from "../../../../types/blog";
+import { BlogPost, Content as BlogContent } from "../../../../types/post";
+import { CHANGE_EVENT } from "../../../../types/HTMLEvent";
 
 export default function ProjectAdd() {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [blogPost, setBlogPost] = useState<BlogPost>({
     title: "",
     role: "",
     frontend: "",
     backend: "",
     general: "",
+    description: "",
     contents: [],
   });
-  const [blogContentsArray, setBlogContentsArray] = useState<
-    Array<BlogContent>
-  >([]);
+  const [blogContents, setBlogContents] = useState<BlogContent[]>([
+    {
+      location: 0,
+      header: "",
+      content: "",
+      images: [
+        {
+          image: "",
+        },
+      ],
+      links: [
+        {
+          tag: "",
+          link: "",
+        },
+      ],
+    },
+  ]);
 
-  const onPostTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      title: e.target.value,
-    });
-  };
-  const onPostRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      role: e.target.value,
-    });
-  };
-  const onPostFrontendChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      frontend: e.target.value,
-    });
-  };
-  const onPostBackendChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      backend: e.target.value,
-    });
-  };
-  const onPostGeneralChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogPost({
-      ...blogPost,
-      general: e.target.value,
-    });
-  };
-
-  const onContentChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
-    i: number,
-    t: string
-  ) => {
-    setBlogContentsArray([
-      ...blogContentsArray.slice(0, i),
-      { ...blogContentsArray[i], [t]: e.target.value },
-      ...blogContentsArray.slice(i + 1),
-    ]);
-  };
-
-  const addMoreContent = () => {
-    setAmount((amount) => amount + 1);
-    setBlogContentsArray([
-      ...blogContentsArray,
+  const addContent = () => {
+    console.log(localStorage.getItem("apiKey"));
+    setAmount((amount) => (amount += 1));
+    setBlogContents((blogContents) => [
+      ...blogContents,
       {
         location: amount,
         header: "",
         content: "",
-        link: "",
-        image: "",
-        code: "",
+        images: [
+          {
+            image: "",
+          },
+        ],
+        links: [
+          {
+            tag: "",
+            link: "",
+          },
+        ],
       },
     ]);
+    setBlogPost((blogPost) => ({
+      ...blogPost,
+      contents: blogContents,
+    }));
+  };
+
+  const addLink = (i: number) => {
+    setBlogContents((blogContents) => [
+      ...blogContents.slice(0, i),
+      {
+        ...blogContents[i],
+        links: [
+          ...blogContents[i].links,
+          {
+            tag: "",
+            link: "",
+          },
+        ],
+      },
+      ...blogContents.slice(i + 1),
+    ]);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
+    console.log(blogPost);
+    console.log(blogContents);
+  };
+
+  const addImage = (i: number) => {
+    setBlogContents((blogContents) => [
+      ...blogContents.slice(0, i),
+      {
+        ...blogContents[i],
+        images: [
+          ...blogContents[i].images,
+          {
+            image: "",
+          },
+        ],
+      },
+      ...blogContents.slice(i + 1),
+    ]);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
+    console.log(blogPost);
+    console.log(blogContents);
+  };
+
+  const onPostChange = (e: CHANGE_EVENT, t: string) => {
+    setBlogPost({
+      ...blogPost,
+      [t]: e.target.value,
+    });
+  };
+
+  const onContentChange = (e: CHANGE_EVENT, i: number, t: string) => {
+    setBlogContents((blogContents) => [
+      ...blogContents.slice(0, i),
+      {
+        ...blogContents[i],
+        [t]: e.target.value,
+      },
+      ...blogContents.slice(i + 1),
+    ]);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
+  };
+
+  const onImageChange = (e: CHANGE_EVENT, i: number, l: number) => {
+    setBlogContents((blogContents) => [
+      ...blogContents.slice(0, i),
+      {
+        ...blogContents[i],
+        images: [
+          ...blogContents[i].images.slice(0, l),
+          {
+            image: e.target.value,
+          },
+          ...blogContents[i].images.slice(l + 1),
+        ],
+      },
+      ...blogContents.slice(i + 1),
+    ]);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
+  };
+
+  const onLinkChange = (e: CHANGE_EVENT, i: number, l: number, t: string) => {
+    setBlogContents((blogContents) => [
+      ...blogContents.slice(0, i),
+      {
+        ...blogContents[i],
+        links: [
+          ...blogContents[i].links.slice(0, l),
+          {
+            ...blogContents[i].links[l],
+            [t]: e.target.value,
+          },
+          ...blogContents[i].links.slice(l + 1),
+        ],
+      },
+      ...blogContents.slice(i + 1),
+    ]);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
   };
 
   const addPost = () => {
+    console.log(blogPost);
+    setBlogPost((blogPost) => ({ ...blogPost, contents: blogContents }));
     axios
       .post(url + "add/blogPost", blogPost, {
         headers: {
@@ -94,16 +176,6 @@ export default function ProjectAdd() {
         alert("Failed to Create a Post !");
       });
   };
-
-  const capturePost = () => {
-    setBlogPost({
-      ...blogPost,
-      contents: blogContentsArray,
-    });
-    console.log(blogPost);
-
-  };
-
   return (
     <div className="add-project-wrapper">
       <div className="add-project-content">
@@ -112,49 +184,66 @@ export default function ProjectAdd() {
           <table>
             <tbody>
               <tr>
-                <td>title : </td>
-                <td>
-                  <input type="text" onChange={(e) => onPostTitleChange(e)} />
-                </td>
-              </tr>
-              <tr>
-                <td>role : </td>
-                <td>
-                  <input type="text" onChange={(e) => onPostRoleChange(e)} />
-                </td>
-              </tr>
-              <tr>
-                <td>frontend : </td>
+                <td>title :</td>
                 <td>
                   <input
                     type="text"
-                    onChange={(e) => onPostFrontendChange(e)}
+                    onChange={(e) => onPostChange(e, "title")}
                   />
                 </td>
               </tr>
               <tr>
-                <td>backend : </td>
+                <td>role :</td>
                 <td>
-                  <input type="text" onChange={(e) => onPostBackendChange(e)} />
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "role")}
+                  />
                 </td>
               </tr>
               <tr>
-                <td>general : </td>
+                <td>frontend :</td>
                 <td>
-                  <input type="text" onChange={(e) => onPostGeneralChange(e)} />
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "frontend")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>backend :</td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "backend")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>general :</td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "general")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>description :</td>
+                <td>
+                  <textarea onChange={(e) => onPostChange(e, "description")} />
                 </td>
               </tr>
             </tbody>
           </table>
-          {Array.from(Array(amount), (el, i) => {
+
+          {blogContents.map((el, i) => {
             return (
-              <div className="add-project-objecs" key={i}>
-                <hr />
-                <h5>Add More Content</h5>
+              <div key={i} className="add-project-post">
                 <table>
                   <tbody>
                     <tr>
-                      <td>Header: </td>
+                      <td>Header</td>
                       <td>
                         <input
                           type="text"
@@ -163,47 +252,77 @@ export default function ProjectAdd() {
                       </td>
                     </tr>
                     <tr>
-                      <td>Image : </td>
-                      <td>
-                        <input
-                          type="text"
-                          onChange={(e) => onContentChange(e, i, "image")}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Link : </td>
-                      <td>
-                        <input
-                          type="text"
-                          onChange={(e) => onContentChange(e, i, "link")}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Content : </td>
+                      <td>content</td>
                       <td>
                         <textarea
                           onChange={(e) => onContentChange(e, i, "content")}
                         />
                       </td>
                     </tr>
-                    <tr>
-                      <td>Code : </td>
-                      <td>
-                        <textarea
-                          onChange={(e) => onContentChange(e, i, "code")}
-                        />
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
+
+                {blogContents[i].links.map((el, l) => {
+                  return (
+                    <div
+                      key={i.toString() + l.toString()}
+                      className="add-project-object"
+                    >
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>tag</td>
+                            <td>
+                              <input
+                                type="text"
+                                onChange={(e) => onLinkChange(e, i, l, "tag")}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>links</td>
+                            <td>
+                              <input
+                                type="text"
+                                onChange={(e) => onLinkChange(e, i, l, "link")}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                })}
+                <button onClick={() => addLink(i)}>Add More Links</button>
+
+                {blogContents[i].images.map((el, l) => {
+                  return (
+                    <div
+                      key={l.toString() + i.toString()}
+                      className="add-project-object"
+                    >
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>image</td>
+                            <td>
+                              <input
+                                type="text"
+                                onChange={(e) => onImageChange(e, i, l)}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                })}
+                <button onClick={() => addImage(i)}>Add More Image</button>
               </div>
             );
           })}
-          <button onClick={() => addMoreContent()}>Add More Content</button>
+          <button onClick={() => addContent()}>Add More Content</button>
         </div>
-        <button onClick={() => capturePost()}>CapturePost Click Twice</button>
         <br />
         <button onClick={() => addPost()}>Send Post</button>
       </div>
