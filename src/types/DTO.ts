@@ -21,7 +21,7 @@ export type Content = {
   content: string;
   code: string;
   links: Link[];
-  iamges: Image[];
+  images: Image[];
 };
 
 export type Link = {
