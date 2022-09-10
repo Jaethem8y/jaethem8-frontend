@@ -1,4 +1,4 @@
-import "./admin.scss";
+import "../../styles/admin/admin.scss";
 
 import { Link } from "react-router-dom";
 

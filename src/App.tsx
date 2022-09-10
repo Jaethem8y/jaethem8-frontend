@@ -9,19 +9,12 @@ import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import Courses from "./components/courses/Courses";
 import Admin from "./components/admin/Admin";
-import ProjectAdd from "./components/admin/project/add/ProjectAdd";
-import StudyAdd from "./components/admin/study/add/StudyAdd";
-import PersonalAdd from "./components/admin/personal/add/PersonalAdd";
 import BlogPosts from "./components/blog/BlogPosts";
 import BlogPost from "./components/blog/content/BlogPost";
 import StudyPosts from "./components/study/StudyPosts";
 import StudyPost from "./components/study/content/StudyPost";
 
 import Login from "./components/admin/login/Login";
-import ProjectEdit from "./components/admin/project/edit/ProjectEdit";
-import PersonalEdit from "./components/admin/personal/edit/PersonalEdit";
-import StudyEdit from "./components/admin/study/edit/StudyEdit";
-
 function App() {
   return (
     <div className="app">

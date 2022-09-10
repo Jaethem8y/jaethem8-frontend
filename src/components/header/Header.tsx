@@ -1,6 +1,6 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 
-import "./header.scss";
+import "../../styles/header/header.scss";
 
 import { Link } from "react-router-dom";
 export default function Header() {

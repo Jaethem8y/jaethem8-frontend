@@ -1,4 +1,4 @@
-import "./studyPosts.scss";
+import "../../styles/study/studyPosts.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
