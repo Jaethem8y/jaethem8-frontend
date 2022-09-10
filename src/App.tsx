@@ -15,6 +15,7 @@ import StudyPosts from "./components/study/StudyPosts";
 import StudyPost from "./components/study/content/StudyPost";
 
 import Login from "./components/admin/login/Login";
+import BlogAdd from "./components/admin/blog/add/BlogAdd";
 function App() {
   return (
     <div className="app">
@@ -24,20 +25,14 @@ function App() {
           <Routes>
             <Route path="/admin/login" element={<Login />} />
 
-            <Route path="/admin/study/add" element={<StudyAdd />} />
-            <Route path="/admin/study/edit/:title" element={<StudyEdit />} />
+            {/*<Route path="/admin/study/add" element={<StudyAdd />} />*/}
+            {/*<Route path="/admin/study/edit/:title" element={<StudyEdit />} />*/}
 
-            <Route path="/admin/projects/add" element={<ProjectAdd />} />
-            <Route
-              path="/admin/projects/edit/:title"
-              element={<ProjectEdit />}
-            />
-
-            <Route path="/admin/personal/add" element={<PersonalAdd />} />
-            <Route
-              path="/admin/personal/edit/:title"
-              element={<PersonalEdit />}
-            />
+            <Route path="/admin/projects/add" element={<BlogAdd />} />
+            {/*<Route*/}
+            {/*  path="/admin/projects/edit/:title"*/}
+            {/*  element={<ProjectEdit />}*/}
+            {/*/>*/}
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/courses" element={<Courses />} />

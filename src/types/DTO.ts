@@ -15,7 +15,6 @@ export type BlogPost = {
 };
 
 export type Content = {
-  title: string;
   location: number;
   header: string;
   content: string;
