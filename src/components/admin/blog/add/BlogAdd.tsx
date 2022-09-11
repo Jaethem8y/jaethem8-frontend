@@ -1,3 +1,4 @@
+import "./add.scss";
 import React, { useState } from "react";
 import { BlogPost } from "../../../../types/DTO";
 import axios from "axios";
@@ -134,6 +135,7 @@ export default function BlogAdd() {
   };
 
   const addPost = () => {
+    capturePost();
     axios
       .post(url + "add/blogPost", blogPost, {
         headers: {
@@ -150,143 +152,170 @@ export default function BlogAdd() {
   };
 
   return (
-    <div className="admin-post-wrapper">
-      <div className="admin-post-content">
-        <table>
-          <tbody>
-            <tr>
-              <td>title : </td>
-              <td>
-                <input type="text" onChange={(e) => onPostChange(e, "title")} />
-              </td>
-            </tr>
-            <tr>
-              <td>role : </td>
-              <td>
-                <input type="text" onChange={(e) => onPostChange(e, "role")} />
-              </td>
-            </tr>
-            <tr>
-              <td>frontend : </td>
-              <td>
-                <input
-                  type="text"
-                  onChange={(e) => onPostChange(e, "frontend")}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>backend : </td>
-              <td>
-                <input
-                  type="text"
-                  onChange={(e) => onPostChange(e, "backend")}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>description : </td>
-              <td>
-                <input
-                  type="text"
-                  onChange={(e) => onPostChange(e, "description")}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>general:</td>
-              <td>
-                <input
-                  type="text"
-                  onChange={(e) => onPostChange(e, "general")}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        {blogPost.contents.forEach((content, i) => {
-          return (
-            <div className="admin-post-content-content">
-              <h5>Add More Content</h5>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Header : </td>
-                    <td>
-                      <input
-                        type="text"
-                        onChange={(e) => onContentChange(e, i, "header")}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Content : </td>
-                    <td>
-                      <textarea
-                        onChange={(e) => onContentChange(e, i, "content")}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Code : </td>
-                    <td>
-                      <textarea
-                        onChange={(e) => onContentChange(e, i, "code")}
-                      />
-                    </td>
-                  </tr>
-                  {content.links.forEach((link, j) => {
-                    return (
-                      <>
-                        <tr>
-                          <td>tag : </td>
-                          <td>
-                            <input
-                              type="text"
-                              onChange={(e) => onLinkChange(e, i, j, "tag")}
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>link : </td>
-                          <td>
-                            <input
-                              type="text"
-                              onChange={(e) => onLinkChange(e, i, j, "link")}
-                            />
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
-                  <button onClick={() => addMoreLink(i)}>Add More Links</button>
-
-                  {content.images.forEach((image, j) => {
-                    return (
-                      <>
-                        <tr>
-                          <td>image : </td>
-                          <td>
-                            <input
-                              type="text"
-                              onChange={(e) => onImageChange(e, i, j, "image")}
-                            />
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
+    <div className="post-wrapper">
+      <div className="post-content">
+        <h3>Add a Project Post</h3>
+        <div className="add-project-post">
+          <table>
+            <tbody>
+              <tr>
+                <td>title : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "title")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>role : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "role")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>frontend : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "frontend")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>backend : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "backend")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>description : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "description")}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>general : </td>
+                <td>
+                  <input
+                    type="text"
+                    onChange={(e) => onPostChange(e, "general")}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <>
+            {blogPost.contents.map((el, i) => {
+              return (
+                <div>
+                  <h5>Add More Content</h5>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Header: </td>
+                        <td>
+                          <input
+                            type="text"
+                            onChange={(e) => onContentChange(e, i, "header")}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Content : </td>
+                        <td>
+                          <textarea
+                            onChange={(e) => onContentChange(e, i, "content")}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Code : </td>
+                        <td>
+                          <textarea
+                            onChange={(e) => onContentChange(e, i, "code")}
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <>
+                    {blogPost.contents[i].links.map((link, j) => {
+                      return (
+                        <div>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <td>tag : </td>
+                                <td>
+                                  <input
+                                    type="text"
+                                    onChange={(e) =>
+                                      onLinkChange(e, i, j, "tag")
+                                    }
+                                  />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>link : </td>
+                                <td>
+                                  <input
+                                    type="text"
+                                    onChange={(e) =>
+                                      onLinkChange(e, i, j, "link")
+                                    }
+                                  />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      );
+                    })}
+                  </>
+                  <button onClick={() => addMoreLink(i)}>Add More Link</button>
+                  <>
+                    {blogPost.contents[i].images.map((image, j) => {
+                      return (
+                        <div>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <td>image : </td>
+                                <td>
+                                  <input
+                                    type="text"
+                                    onChange={(e) =>
+                                      onImageChange(e, i, j, "image")
+                                    }
+                                  />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      );
+                    })}
+                  </>
                   <button onClick={() => addMoreImage(i)}>
-                    Add More Images
+                    Add More Image
                   </button>
-                </tbody>
-              </table>
-            </div>
-          );
-        })}
-        <button onClick={() => addMoreContent()}>Add more contents</button>
-        <button onClick={() => addPost()}>Write Post!</button>
+                </div>
+              );
+            })}
+          </>
+          <button onClick={() => addMoreContent()}>Add More Content</button>
+        </div>
+        <button onClick={() => addPost()}>Add Post</button>
       </div>
     </div>
   );
