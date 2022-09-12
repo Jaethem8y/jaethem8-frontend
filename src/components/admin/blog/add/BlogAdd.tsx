@@ -137,7 +137,7 @@ export default function BlogAdd() {
   const addPost = () => {
     capturePost();
     axios
-      .post(url + "add/blogPost", blogPost, {
+      .post(url + "API/add/blogPost", blogPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
