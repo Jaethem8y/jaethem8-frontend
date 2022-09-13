@@ -29,16 +29,6 @@ export default function Admin() {
             <p>Add a Study</p>
           </Link>
         </div>
-        <br />
-        <h5>Personal Links</h5>
-        <div className="admin-links">
-          <Link to="/admin/personal/edit">
-            <p>Edit Personal</p>
-          </Link>
-          <Link to="/admin/personal/add">
-            <p>Add a Personal</p>
-          </Link>
-        </div>
       </div>
     </div>
   );
