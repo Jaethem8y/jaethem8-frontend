@@ -16,6 +16,10 @@ import StudyPost from "./components/study/content/StudyPost";
 
 import Login from "./components/admin/login/Login";
 import BlogAdd from "./components/admin/blog/add/BlogAdd";
+import BlogEdit from "./components/admin/blog/edit/BlogEdit";
+import StudyAdd from "./components/admin/study/add/StudyAdd";
+import StudyEdit from "./components/admin/study/edit/StudyEdit";
+
 function App() {
   return (
     <div className="app">
@@ -25,14 +29,14 @@ function App() {
           <Routes>
             <Route path="/admin/login" element={<Login />} />
 
-            {/*<Route path="/admin/study/add" element={<StudyAdd />} />*/}
-            {/*<Route path="/admin/study/edit/:title" element={<StudyEdit />} />*/}
+            <Route path="/admin/study/add" element={<StudyAdd />} />
+            <Route path="/admin/study/edit/:title" element={<StudyEdit />} />
 
             <Route path="/admin/projects/add" element={<BlogAdd />} />
-            {/*<Route*/}
-            {/*  path="/admin/projects/edit/:title"*/}
-            {/*  element={<ProjectEdit />}*/}
-            {/*/>*/}
+            <Route
+              path="/admin/projects/edit/:title"
+              element={<BlogEdit />}
+            />
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/courses" element={<Courses />} />

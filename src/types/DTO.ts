@@ -1,6 +1,7 @@
 export type Post = {
   title: string;
   description: string;
+  pubDate:string;
   contents: Content[];
 };
 
@@ -9,6 +10,7 @@ export type BlogPost = {
   role: string;
   frontend: string;
   backend: string;
+  pubDate: string;
   description: string;
   general: string;
   contents: Content[];

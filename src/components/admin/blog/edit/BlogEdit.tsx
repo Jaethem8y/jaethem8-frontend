@@ -1,22 +1,37 @@
-import "../../../../styles/admin/post.scss";
-import React, { useState } from "react";
-import { BlogPost } from "../../../../types/DTO";
+import "../../../../styles/admin/post.scss"
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {BlogPost} from "../../../../types/DTO";
 import axios from "axios";
-import { url } from "../../../../config";
-import { CHANGE_EVENT } from "../../../../types/HTMLEvent";
+import {url} from "../../../../config";
+import {CHANGE_EVENT} from "../../../../types/HTMLEvent";
 
 export default function BlogAdd() {
+  const {title} = useParams();
   const [amount, setAmount] = useState(0);
   const [blogPost, setBlogPost] = useState<BlogPost>({
     title: "",
     role: "",
     frontend: "",
     backend: "",
-    pubDate:"",
+    pubDate: "",
     description: "",
     general: "",
     contents: [],
   });
+
+  useEffect(() => {
+    const fetchBlogPost = async () => {
+      try {
+        const res = await axios.get(url + "API/blogPost/" + title);
+        setBlogPost(res.data);
+        setAmount(res.data.blogContents.length);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchBlogPost();
+  }, [])
 
   const onPostChange = (e: CHANGE_EVENT, t: string) => {
     setBlogPost({
@@ -30,7 +45,7 @@ export default function BlogAdd() {
       ...blogPost,
       contents: [
         ...blogPost.contents.slice(0, i),
-        { ...blogPost.contents[i], [t]: e.target.value },
+        {...blogPost.contents[i], [t]: e.target.value},
         ...blogPost.contents.slice(i + 1),
       ],
     });
@@ -45,7 +60,7 @@ export default function BlogAdd() {
           ...blogPost.contents[i],
           links: [
             ...blogPost.contents[i].links.slice(0, j),
-            { ...blogPost.contents[i].links[j], [t]: e.target.value },
+            {...blogPost.contents[i].links[j], [t]: e.target.value},
             ...blogPost.contents[i].links.slice(j + 1),
           ],
         },
@@ -63,7 +78,7 @@ export default function BlogAdd() {
           ...blogPost.contents[i],
           images: [
             ...blogPost.contents[i].images.slice(0, j),
-            { ...blogPost.contents[i].images[j], [t]: e.target.value },
+            {...blogPost.contents[i].images[j], [t]: e.target.value},
             ...blogPost.contents[i].images.slice(j + 1),
           ],
         },
@@ -138,7 +153,7 @@ export default function BlogAdd() {
   const addPost = () => {
     capturePost();
     axios
-      .post(url + "add/blogPost", blogPost, {
+      .post(url + "edit/blogPost", blogPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
@@ -159,60 +174,66 @@ export default function BlogAdd() {
         <div className="add-project-post">
           <table>
             <tbody>
-              <tr>
-                <td>title : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "title")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>role : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "role")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>frontend : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "frontend")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>backend : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "backend")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>description : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "description")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>general : </td>
-                <td>
-                  <input
-                    type="text"
-                    onChange={(e) => onPostChange(e, "general")}
-                  />
-                </td>
-              </tr>
+            <tr>
+              <td>title :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.title}
+                  onChange={(e) => onPostChange(e, "title")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>role :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.role}
+                  onChange={(e) => onPostChange(e, "role")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>frontend :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.frontend}
+                  onChange={(e) => onPostChange(e, "frontend")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>backend :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.backend}
+                  onChange={(e) => onPostChange(e, "backend")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>description :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.description}
+                  onChange={(e) => onPostChange(e, "description")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>general :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.general}
+                  onChange={(e) => onPostChange(e, "general")}
+                />
+              </td>
+            </tr>
             </tbody>
           </table>
           <>
@@ -222,31 +243,34 @@ export default function BlogAdd() {
                   <h5>Add More Content</h5>
                   <table>
                     <tbody>
-                      <tr>
-                        <td>Header: </td>
-                        <td>
-                          <input
-                            type="text"
-                            onChange={(e) => onContentChange(e, i, "header")}
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Content : </td>
-                        <td>
+                    <tr>
+                      <td>Header:</td>
+                      <td>
+                        <input
+                          type="text"
+                          value={el.header}
+                          onChange={(e) => onContentChange(e, i, "header")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Content :</td>
+                      <td>
                           <textarea
+                            value={el.content}
                             onChange={(e) => onContentChange(e, i, "content")}
                           />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Code : </td>
-                        <td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Code :</td>
+                      <td>
                           <textarea
+                            value={el.code}
                             onChange={(e) => onContentChange(e, i, "code")}
                           />
-                        </td>
-                      </tr>
+                      </td>
+                    </tr>
                     </tbody>
                   </table>
                   <>
@@ -255,28 +279,30 @@ export default function BlogAdd() {
                         <div>
                           <table>
                             <tbody>
-                              <tr>
-                                <td>tag : </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    onChange={(e) =>
-                                      onLinkChange(e, i, j, "tag")
-                                    }
-                                  />
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>link : </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    onChange={(e) =>
-                                      onLinkChange(e, i, j, "link")
-                                    }
-                                  />
-                                </td>
-                              </tr>
+                            <tr>
+                              <td>tag :</td>
+                              <td>
+                                <input
+                                  type="text"
+                                  value={link.tag}
+                                  onChange={(e) =>
+                                    onLinkChange(e, i, j, "tag")
+                                  }
+                                />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>link :</td>
+                              <td>
+                                <input
+                                  type="text"
+                                  value={link.link}
+                                  onChange={(e) =>
+                                    onLinkChange(e, i, j, "link")
+                                  }
+                                />
+                              </td>
+                            </tr>
                             </tbody>
                           </table>
                         </div>
@@ -290,17 +316,18 @@ export default function BlogAdd() {
                         <div>
                           <table>
                             <tbody>
-                              <tr>
-                                <td>image : </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    onChange={(e) =>
-                                      onImageChange(e, i, j, "image")
-                                    }
-                                  />
-                                </td>
-                              </tr>
+                            <tr>
+                              <td>image :</td>
+                              <td>
+                                <input
+                                  type="text"
+                                  value={image.image}
+                                  onChange={(e) =>
+                                    onImageChange(e, i, j, "image")
+                                  }
+                                />
+                              </td>
+                            </tr>
                             </tbody>
                           </table>
                         </div>

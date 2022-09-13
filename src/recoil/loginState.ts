@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import {atom, selector} from "recoil";
 
 export const loginState = atom({
   key: "key",
@@ -7,7 +7,7 @@ export const loginState = atom({
 
 export const apiKeyState = selector({
   key: "jaethem8APIKey",
-  get: ({ get }) => {
+  get: ({get}) => {
     const key = get(loginState);
 
     return key;
