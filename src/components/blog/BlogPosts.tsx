@@ -1,4 +1,4 @@
-import "../../styles/blog/blogPosts.scss";
+import "../../styles/post/posts.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -67,10 +67,13 @@ export default function BlogPosts() {
                   <hr />
                   <h3>{post.title}</h3>
                   <p>
+                    <b>Description : </b> {post.description}
+                  </p>
+                  <p>
                     <b>role: </b> {post.role}
                   </p>
                   <p>
-                    <b> frontend/backend/other: </b>
+                    <b> frontend / backend / other : </b>
                     {post.frontend} / {post.backend} / {post.general}
                   </p>
                   <hr />

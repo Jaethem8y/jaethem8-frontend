@@ -1,4 +1,4 @@
-import "../../styles/study/studyPosts.scss";
+import "../../styles/post/posts.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -67,6 +67,9 @@ export default function BlogPosts() {
                 <div className="view-post-inside">
                   <hr />
                   <h3>{post.title}</h3>
+                  <p>
+                    <b>Description : </b> {post.description}
+                  </p>
                   <hr />
                 </div>
               </Link>

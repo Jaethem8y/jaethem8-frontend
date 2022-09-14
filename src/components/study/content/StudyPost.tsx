@@ -1,18 +1,17 @@
-import "../../../styles/study/content/studyPost.scss";
+import "../../../styles/post/post.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import { url } from "../../../config";
-import { StudyContent, StudyPost } from "../../../types/study";
+import {Post as StudyPost} from "../../../types/DTO";
 
 export default function BlogPosts() {
   const { title } = useParams();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [studyPost, setStudyPost] = useState<StudyPost>();
-  const [studyContents, setStudyContents] = useState<StudyContent[]>([]);
 
   useEffect(() => {
     const fetchBlogPost = async () => {
@@ -21,7 +20,6 @@ export default function BlogPosts() {
         setError(false);
         const res = await axios.get(url + "API/studyPost/" + title);
         setStudyPost(res.data);
-        setStudyContents(res.data.blogContents);
         setLoading(false);
       } catch (e) {
         setError(true);
@@ -62,19 +60,30 @@ export default function BlogPosts() {
     <div className="view-content-wrapper">
       <div className="view-content-content">
         <h3>Study Post Name : {studyPost.title}</h3>
-        {studyContents.map((content, i) => {
+        {studyPost.contents.map((content, i) => {
           return (
             <div className="view-content-inside" key={i}>
               {content.header !== "" && <h4>{content.header}</h4>}
               {content.content !== "" && <p>{content.content}</p>}
-              {content.link !== "" && (
-                <p>
-                  <a href={content.link}>{content.link}</a>
-                </p>
-              )}
-
               {content.code !== "" && <code>{content.code}</code>}
-              {content.image !== "" && <img src={content.image} alt="" />}
+              <>
+                {content.links.map((link,j) => {
+                  return (
+                    <div className="view-content-inside" key={j}>
+                      {link.tag !== "" && <p><b>{link.tag}</b><a href={link.link}>{link.link}</a></p>}
+                    </div>
+                  )
+                })}
+              </>
+              <>
+                {content.images.map((image,j) => {
+                  return (
+                    <div className="view-content-inside" key={j}>
+                      {image.image !== "" && <img src={image.image} alt="" />}
+                    </div>
+                  )
+                })}
+              </>
             </div>
           );
         })}
