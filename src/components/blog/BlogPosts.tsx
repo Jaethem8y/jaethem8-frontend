@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { url } from "../../config";
-import { BlogPost } from "../../types/blog";
+import { BlogPost } from "../../types/DTO";
 
 export default function BlogPosts() {
   const [error, setError] = useState(false);
