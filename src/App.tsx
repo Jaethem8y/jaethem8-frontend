@@ -9,17 +9,15 @@ import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
 import Courses from "./components/courses/Courses";
 import Admin from "./components/admin/Admin";
-import ProjectAdd from "./components/admin/project/add/ProjectAdd";
-import StudyAdd from "./components/admin/study/add/StudyAdd";
-import PersonalAdd from "./components/admin/personal/add/PersonalAdd";
 import BlogPosts from "./components/blog/BlogPosts";
 import BlogPost from "./components/blog/content/BlogPost";
 import StudyPosts from "./components/study/StudyPosts";
 import StudyPost from "./components/study/content/StudyPost";
 
 import Login from "./components/admin/login/Login";
-import ProjectEdit from "./components/admin/project/edit/ProjectEdit";
-import PersonalEdit from "./components/admin/personal/edit/PersonalEdit";
+import BlogAdd from "./components/admin/blog/add/BlogAdd";
+import BlogEdit from "./components/admin/blog/edit/BlogEdit";
+import StudyAdd from "./components/admin/study/add/StudyAdd";
 import StudyEdit from "./components/admin/study/edit/StudyEdit";
 
 function App() {
@@ -34,16 +32,10 @@ function App() {
             <Route path="/admin/study/add" element={<StudyAdd />} />
             <Route path="/admin/study/edit/:title" element={<StudyEdit />} />
 
-            <Route path="/admin/projects/add" element={<ProjectAdd />} />
+            <Route path="/admin/projects/add" element={<BlogAdd />} />
             <Route
               path="/admin/projects/edit/:title"
-              element={<ProjectEdit />}
-            />
-
-            <Route path="/admin/personal/add" element={<PersonalAdd />} />
-            <Route
-              path="/admin/personal/edit/:title"
-              element={<PersonalEdit />}
+              element={<BlogEdit />}
             />
 
             <Route path="/admin" element={<Admin />} />

@@ -1,4 +1,4 @@
-import "./home.scss";
+import "../../styles/home/home.scss";
 
 import yub from "../../images/home/homeImageYub.png";
 import me from "../../images/home/homeImageYubAndMe.jpg";

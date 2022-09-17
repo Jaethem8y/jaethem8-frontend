@@ -1,4 +1,4 @@
-import "./admin.scss";
+import "../../styles/admin/admin.scss";
 
 import { Link } from "react-router-dom";
 
@@ -27,16 +27,6 @@ export default function Admin() {
           </Link>
           <Link to="/admin/study/add">
             <p>Add a Study</p>
-          </Link>
-        </div>
-        <br />
-        <h5>Personal Links</h5>
-        <div className="admin-links">
-          <Link to="/admin/personal/edit">
-            <p>Edit Personal</p>
-          </Link>
-          <Link to="/admin/personal/add">
-            <p>Add a Personal</p>
           </Link>
         </div>
       </div>

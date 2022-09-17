@@ -1,4 +1,4 @@
-import "./courses.scss";
+import "../../styles/courses/courses.scss";
 
 export default function Courses() {
   return (
@@ -8,6 +8,31 @@ export default function Courses() {
           CS Courses from Drake University, Des Moines, IA
         </h4>
         <br />
+        <p className="text-secondary">
+          <b>
+            CS 199: Full Stack Web Development Serverless (Independent study)
+          </b>
+          <br />- Since the serverless has become more and more powerful, this
+          class, I will study the serverless architecture and deploy at least
+          one full stack application that has serverless implementation
+        </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 199: Design Patterns (Independent Study)</b>
+          <br />- Requested this independent study after my summer internship.
+          To work with large code base, it is important to create reusable
+          patterns and apply effective desing pattern to maximize the
+          productivity. This course focuses on Object Oriented Design Patterns.
+        </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 195: Economics Data Science (Research)</b>
+          <br />- Research group that predicts when the certain banks will fail
+          by suing machine learning method. I was(still am) developing APIs, so
+          that the data science team could use HTTP methods to fetch the data
+          instead of writing raw SQL in their code.
+        </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 188: Software Engineering</b>
           <br />- This course provides an in-depth study of the design and
@@ -19,6 +44,7 @@ export default function Courses() {
           reasonably sized software solution alongside a team of students from
           computer science.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 178: Cloud Computing and DB Systems (AWS)</b>
           <br />- This course will focus on how large amounts of data are
@@ -30,6 +56,7 @@ export default function Courses() {
           databases (e.g., no SQL). This course is designed to complement rather
           than overlap the existing course Database Management
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 167: Machine Learning</b>
           <br />- Introduction to foundational and contemporary machine learning
@@ -40,14 +67,16 @@ export default function Courses() {
           clustering. Modern machine learning software and programming libraries
           will be utilized.
         </p>
+        <hr />
         <p className="text-secondary">
-          <b>CS 161: Compiler Construction</b>
+          <b>CS 161: Compiler Construction (Independent Study)</b>
           <br />- This course provides an understanding of the various phases of
           the programming language translation process. Compiler principles and
           tools are examined, and applied to the development and implementation
           of a working language processor. Various parsing techniques are
           compared.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 160: Operating Systems</b>
           <br />- Introduction to the design, development and implementation of
@@ -55,6 +84,7 @@ export default function Courses() {
           system design, networking and the interface between hardware and
           software. Examination of actual operating system source code.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 143: Artificial Intelligence</b>
           <br />- Introduction to the theory, tools and methods of artificial
@@ -65,6 +95,7 @@ export default function Courses() {
           as natural language understanding, vision or expert systems are
           examined.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 137: Algorithm Analysis</b>
           <br />- Formal and informal methods for analyzing the correctness and
@@ -73,6 +104,7 @@ export default function Courses() {
           hash-tables, heaps, and graph algorithms. Introduction to complexity
           theory and NP-Completeness.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 135: Programming Languages (Haskell)</b>
           <br />- Principles of programming languages are studied from the
@@ -82,13 +114,27 @@ export default function Courses() {
           course concentrates on imperative and object-oriented paradigms, but
           also covers functional and logic languages.
         </p>
+        <hr />
         <p className="text-secondary">
-          <b>CS 130: Computer Org and Assembly Language</b>
+          <b>CS 130: Computer Org and Assembly Language </b>
           <br />- Computer organization and architecture; internal
           representation of programs and data; assembly language programming;
           addressing techniques; macros; assemblers; linking; input/output
           concepts.
         </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 120: Human Computer Interaction </b>
+          <br />- This course provides an introduction to and overview of the
+          field of human-computer interaction (HCI). HCI is an interdisciplinary
+          field that integrates theories and methodologies from computer
+          science, psychology, design, and engineering, with the aim of building
+          useful, engaging, and usable interfaces. This course covers a rich set
+          of HCI methods and tools, both from a theoretical and practical point
+          of view, in use by today’s HCI professionals for designing and
+          improving technologies.
+        </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 83: Computer Ethics</b>
           <br />- This course examines the ethical and social issues arising
@@ -103,6 +149,7 @@ export default function Courses() {
           the ability to think clearly; 2) habits of professional responsibility
           and behavior; and 3) effective writing and presentation skills.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 66: Introduction to CS II (Java)</b>
           <br />- This course extends the work of CS 065. This object of the
@@ -111,6 +158,7 @@ export default function Courses() {
           language. Sorting, searching and tree traversal algorithms are used
           and analyzed. Preparation for further study in computer science.
         </p>
+        <hr />
         <p className="text-secondary">
           <b>CS 65: Introduction to CS I (Python)</b>
           <br />- An introduction to the field of computer science is provided
@@ -119,6 +167,7 @@ export default function Courses() {
           debugging, and program verification will be discussed. Objects will be
           introduced, used, and created
         </p>
+        <hr />
         <br />
         <h5 className="text-secondary">
           Description from Drake University CS website:{"  "}

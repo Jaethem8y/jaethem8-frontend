@@ -1,11 +1,11 @@
-import "./blogPosts.scss";
+import "../../styles/post/posts.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { url } from "../../config";
-import { BlogPost } from "../../types/blog";
+import { BlogPost } from "../../types/DTO";
 
 export default function BlogPosts() {
   const [error, setError] = useState(false);
@@ -67,10 +67,13 @@ export default function BlogPosts() {
                   <hr />
                   <h3>{post.title}</h3>
                   <p>
+                    <b>Description : </b> {post.description}
+                  </p>
+                  <p>
                     <b>role: </b> {post.role}
                   </p>
                   <p>
-                    <b> frontend/backend/other: </b>
+                    <b> frontend / backend / other : </b>
                     {post.frontend} / {post.backend} / {post.general}
                   </p>
                   <hr />

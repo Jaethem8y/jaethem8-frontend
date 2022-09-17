@@ -1,4 +1,4 @@
-import "./login.scss";
+import "../../../styles/admin/login/login.scss";
 
 import { useState } from "react";
 import axios from "axios";

@@ -1,94 +1,98 @@
 import "../../../../styles/admin/post.scss"
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Post} from "../../../../types/DTO";
+import {BlogPost} from "../../../../types/DTO";
 import axios from "axios";
 import {url} from "../../../../config";
 import {CHANGE_EVENT} from "../../../../types/HTMLEvent";
 
-export default function StudyAdd() {
+export default function BlogAdd() {
   const {title} = useParams();
   const [amount, setAmount] = useState(0);
-  const [studyPost, setStudyPost] = useState<Post>({
+  const [blogPost, setBlogPost] = useState<BlogPost>({
     title: "",
+    role: "",
+    frontend: "",
+    backend: "",
     pubDate: "",
     description: "",
+    general: "",
     contents: [],
   });
 
   useEffect(() => {
-    const fetchStudyPost = async () => {
+    const fetchBlogPost = async () => {
       try {
-        const res = await axios.get(url + "API/studyPost/" + title);
-        setStudyPost(res.data);
-        setAmount(res.data.studyContents.length);
+        const res = await axios.get(url + "API/blogPost/" + title);
+        setBlogPost(res.data);
+        setAmount(res.data.blogContents.length);
       } catch (e) {
         console.log(e);
       }
     };
-    fetchStudyPost();
+    fetchBlogPost();
   }, [])
 
   const onPostChange = (e: CHANGE_EVENT, t: string) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       [t]: e.target.value,
     });
   };
 
   const onContentChange = (e: CHANGE_EVENT, i: number, t: string) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents.slice(0, i),
-        {...studyPost.contents[i], [t]: e.target.value},
-        ...studyPost.contents.slice(i + 1),
+        ...blogPost.contents.slice(0, i),
+        {...blogPost.contents[i], [t]: e.target.value},
+        ...blogPost.contents.slice(i + 1),
       ],
     });
   };
 
   const onLinkChange = (e: CHANGE_EVENT, i: number, j: number, t: string) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents.slice(0, i),
+        ...blogPost.contents.slice(0, i),
         {
-          ...studyPost.contents[i],
+          ...blogPost.contents[i],
           links: [
-            ...studyPost.contents[i].links.slice(0, j),
-            {...studyPost.contents[i].links[j], [t]: e.target.value},
-            ...studyPost.contents[i].links.slice(j + 1),
+            ...blogPost.contents[i].links.slice(0, j),
+            {...blogPost.contents[i].links[j], [t]: e.target.value},
+            ...blogPost.contents[i].links.slice(j + 1),
           ],
         },
-        ...studyPost.contents.slice(i + 1),
+        ...blogPost.contents.slice(i + 1),
       ],
     });
   };
 
   const onImageChange = (e: CHANGE_EVENT, i: number, j: number, t: string) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents.slice(0, i),
+        ...blogPost.contents.slice(0, i),
         {
-          ...studyPost.contents[i],
+          ...blogPost.contents[i],
           images: [
-            ...studyPost.contents[i].images.slice(0, j),
-            {...studyPost.contents[i].images[j], [t]: e.target.value},
-            ...studyPost.contents[i].images.slice(j + 1),
+            ...blogPost.contents[i].images.slice(0, j),
+            {...blogPost.contents[i].images[j], [t]: e.target.value},
+            ...blogPost.contents[i].images.slice(j + 1),
           ],
         },
-        ...studyPost.contents.slice(i + 1),
+        ...blogPost.contents.slice(i + 1),
       ],
     });
   };
 
   const addMoreContent = () => {
     setAmount((amount) => amount + 1);
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents,
+        ...blogPost.contents,
         {
           location: amount,
           header: "",
@@ -99,57 +103,57 @@ export default function StudyAdd() {
         },
       ],
     });
-    console.log(studyPost);
+    console.log(blogPost);
   };
 
   const addMoreLink = (i: number) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents.slice(0, i),
+        ...blogPost.contents.slice(0, i),
         {
-          ...studyPost.contents[i],
+          ...blogPost.contents[i],
           links: [
-            ...studyPost.contents[i].links,
+            ...blogPost.contents[i].links,
             {
               tag: "",
               link: "",
             },
           ],
         },
-        ...studyPost.contents.slice(i + 1),
+        ...blogPost.contents.slice(i + 1),
       ],
     });
   };
 
   const addMoreImage = (i: number) => {
-    setStudyPost({
-      ...studyPost,
+    setBlogPost({
+      ...blogPost,
       contents: [
-        ...studyPost.contents.slice(0, i),
+        ...blogPost.contents.slice(0, i),
         {
-          ...studyPost.contents[i],
+          ...blogPost.contents[i],
           images: [
-            ...studyPost.contents[i].images,
+            ...blogPost.contents[i].images,
             {
               image: "",
             },
           ],
         },
-        ...studyPost.contents.slice(i + 1),
+        ...blogPost.contents.slice(i + 1),
       ],
     });
   };
 
   const capturePost = () => {
-    setStudyPost(studyPost);
-    console.log(studyPost);
+    setBlogPost(blogPost);
+    console.log(blogPost);
   };
 
   const addPost = () => {
     capturePost();
     axios
-      .post(url + "edit/studyPost", studyPost, {
+      .post(url + "edit/blogPost", blogPost, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("apiKey"),
         },
@@ -175,8 +179,38 @@ export default function StudyAdd() {
               <td>
                 <input
                   type="text"
-                  value={studyPost.title}
+                  value={blogPost.title}
                   onChange={(e) => onPostChange(e, "title")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>role :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.role}
+                  onChange={(e) => onPostChange(e, "role")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>frontend :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.frontend}
+                  onChange={(e) => onPostChange(e, "frontend")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>backend :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.backend}
+                  onChange={(e) => onPostChange(e, "backend")}
                 />
               </td>
             </tr>
@@ -185,15 +219,25 @@ export default function StudyAdd() {
               <td>
                 <input
                   type="text"
-                  value={studyPost.description}
+                  value={blogPost.description}
                   onChange={(e) => onPostChange(e, "description")}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>general :</td>
+              <td>
+                <input
+                  type="text"
+                  value={blogPost.general}
+                  onChange={(e) => onPostChange(e, "general")}
                 />
               </td>
             </tr>
             </tbody>
           </table>
           <>
-            {studyPost.contents.map((el, i) => {
+            {blogPost.contents.map((el, i) => {
               return (
                 <div>
                   <h5>Add More Content</h5>
@@ -230,7 +274,7 @@ export default function StudyAdd() {
                     </tbody>
                   </table>
                   <>
-                    {studyPost.contents[i].links.map((link, j) => {
+                    {blogPost.contents[i].links.map((link, j) => {
                       return (
                         <div>
                           <table>
@@ -267,7 +311,7 @@ export default function StudyAdd() {
                   </>
                   <button onClick={() => addMoreLink(i)}>Add More Link</button>
                   <>
-                    {studyPost.contents[i].images.map((image, j) => {
+                    {blogPost.contents[i].images.map((image, j) => {
                       return (
                         <div>
                           <table>

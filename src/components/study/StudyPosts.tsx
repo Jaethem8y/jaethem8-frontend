@@ -1,11 +1,11 @@
-import "./studyPosts.scss";
+import "../../styles/post/posts.scss";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { url } from "../../config";
-import { StudyPost } from "../../types/study";
+import { Post as StudyPost } from "../../types/DTO";
 
 export default function BlogPosts() {
   const [error, setError] = useState(false);
@@ -67,6 +67,9 @@ export default function BlogPosts() {
                 <div className="view-post-inside">
                   <hr />
                   <h3>{post.title}</h3>
+                  <p>
+                    <b>Description : </b> {post.description}
+                  </p>
                   <hr />
                 </div>
               </Link>
