@@ -9,6 +9,31 @@ export default function Courses() {
         </h4>
         <br />
         <p className="text-secondary">
+          <b>
+            CS 199: Full Stack Web Development Serverless (Independent study)
+          </b>
+          <br />- Since the serverless has become more and more powerful, this
+          class, I will study the serverless architecture and deploy at least
+          one full stack application that has serverless implementation
+        </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 199: Design Patterns (Independent Study)</b>
+          <br />- Requested this independent study after my summer internship.
+          To work with large code base, it is important to create reusable
+          patterns and apply effective desing pattern to maximize the
+          productivity. This course focuses on Object Oriented Design Patterns.
+        </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 195: Economics Data Science (Research)</b>
+          <br />- Research group that predicts when the certain banks will fail
+          by suing machine learning method. I was(still am) developing APIs, so
+          that the data science team could use HTTP methods to fetch the data
+          instead of writing raw SQL in their code.
+        </p>
+        <hr />
+        <p className="text-secondary">
           <b>CS 188: Software Engineering</b>
           <br />- This course provides an in-depth study of the design and
           development of software. The life cycle of software, various
@@ -44,7 +69,7 @@ export default function Courses() {
         </p>
         <hr />
         <p className="text-secondary">
-          <b>CS 161: Compiler Construction</b>
+          <b>CS 161: Compiler Construction (Independent Study)</b>
           <br />- This course provides an understanding of the various phases of
           the programming language translation process. Compiler principles and
           tools are examined, and applied to the development and implementation
