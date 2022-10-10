@@ -9,12 +9,17 @@ export default function Courses() {
         </h4>
         <br />
         <p className="text-secondary">
-          <b>
-            CS 199: Full Stack Web Development Serverless (Independent study)
-          </b>
-          <br />- Since the serverless has become more and more powerful, this
-          class, I will study the serverless architecture and deploy at least
-          one full stack application that has serverless implementation
+          <b>CS 199: API & DB development (Independent study)</b>
+          <br />- Redesigning current database for ECON DATA SCIENCE research
+          group to optimize Machine Learning and Analytic teams needs better.
+          Current API will be modified to reflect the changes in DB and to add
+          more features for Machine Learning and Analytics team.
+        </p>
+        <hr />
+        <p className="text-secondary">
+          <b>CS 199: Full Stack Web Development (Independent study)</b>
+          <br />- Creating a serverless fullstack app that could perform
+          authentication and authorization
         </p>
         <hr />
         <p className="text-secondary">
